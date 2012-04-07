@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html  
+    version="XHTML+RDFa 1.0"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xml:lang="en"
+	xmlns:dbpedia = "http://dbpedia.org/resource/"
+	xmlns:dbprop = "http://dbpedia.org/property/"
+	xmlns:dbonto = "http://dbpedia.org/ontology/"
+    xmlns:schema="http://schema.org/"
+    xmlns:demo="http://iks.demo.eu/">
+	<head>
+        <title>Image annotation</title>
+		<!--script type="text/javascript" src="./lib/tagger.js"></script -->
+		
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		
+		<!-- Demo-specific CSS -->
+		<script type="text/javascript" src="./lib/jquery/jquery-1.6.1.min.js"></script>
+		
+		<!-- Face recognition widget Face.com -->
+		<script type="text/javascript" src="http://api.face.com/lib/api_client.js"></script>
+		<script type="text/javascript" src="http://api.face.com/lib/tagger.js"></script>
+		<script type="text/javascript">
+			FACE_API_KEY = "16fc0307893bfc78a015c141c6e584bd";
+			FaceClientAPI.init(FACE_API_KEY);
+		</script>
+		<script type="text/javascript">
+			$(window).load(function () {
+				tagFace();
+			});
+			function tagFace(){
+				FaceTagger.load("#sample_img", {
+					click_add_tag: false,
+					resizable: true,
+					facebook: true,
+					fade: true,
+					tags_list: true,
+					add_tag_button: true,
+					demo_mode: true
+				});
+			}
+		</script>
+    </head>
+    <body>
+		<img src="img/iks-logo.jpeg" height="40" style="position:fixed;top:0px;left:0px;" />
+        <img src="img/dfki-logo.jpeg" height="40" style="position:fixed;top:0px;right:0px;" />
+        <div id="container">
+            <div id="content">
+				<h2 class="title">The Beatles</h2>
+				The Beatles were an English rock band formed in Liverpool in 1960, 
+				and one of the most commercially successful and critically acclaimed acts in the history of popular music.
+				The group's best-known lineup consisted of John Lennon (rhythm guitar, vocals), 
+				Paul McCartney (bass guitar, vocals), George Harrison (lead guitar, vocals) 
+				and Ringo Starr (drums, vocals). Rooted in skiffle and 1950s rock and roll, 
+				the group later worked in many genres ranging from pop ballads to psychedelic rock, 
+				often incorporating classical and other elements in innovative ways. 
+				Their enormous popularity first emerged as "Beatlemania"; 
+				as their songwriting grew in sophistication by the late 1960s, 
+				they came to be perceived by many fans and cultural observers as 
+				an embodiment of the ideals shared by the era's sociocultural revolutions.</div>
+            <div id="widgets">
+				<div id="entity_info"></div>
+				<div id="photos">
+					<img id="sample_img" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG" style = "width: 200px;"/>
+				</div>
+			</div>
+        </div>
+    </body>
+</html>
