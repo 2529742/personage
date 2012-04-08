@@ -21,25 +21,6 @@
 		<!-- Face recognition widget Face.com -->
 		<script type="text/javascript" src="http://api.face.com/lib/api_client.js"></script>
 		<script type="text/javascript" src="http://api.face.com/lib/tagger.js"></script>
-		<script type="text/javascript">
-			FACE_API_KEY = "16fc0307893bfc78a015c141c6e584bd";
-			FaceClientAPI.init(FACE_API_KEY);
-		</script>
-		<script type="text/javascript">
-			$(window).load(function () {
-				tagFace();
-			});
-			function tagFace(){
-				FaceTagger.load("#sample_img", {
-					click_add_tag: false,
-					resizable: true,
-					facebook: true,
-					fade: true,
-					tags_list: true,
-					add_tag_button: true,
-					demo_mode: true
-				});
-			}
 		</script>
     </head>
     <body>
