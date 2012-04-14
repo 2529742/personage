@@ -50,7 +50,7 @@ h1,h2,h3,h4 {
 }
 
 #widgets {
-	width: 200px;
+	width: 300px;
     font-size: 70%;
     height: auto;
 	background: #DDDDDD;
@@ -74,6 +74,9 @@ h1,h2,h3,h4 {
     margin: 1em 0;
 }
 
+#sample_img {
+	width: 300px;
+}
 
 a {
     text-decoration: none;
