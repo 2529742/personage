@@ -17,7 +17,7 @@ $ (function ()  {
   replaceText(text);
   urlImage = 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG';
   replaceImage (urlImage);
-  $('#sample_img').viePersonage({vie: myVIE, FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd"});
+  $('#sample_img').viePersonage({FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd"});
 });
 
 function replaceText(text) {
