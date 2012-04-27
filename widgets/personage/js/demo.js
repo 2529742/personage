@@ -20,8 +20,8 @@ $ (function ()  {
 	//Instantiate VIE and load entities
 	var entities = [
 		'http://dbpedia.org/resource/John_Lennon',
-		'http://dbpedia.org/resource/Ringo_Starr',
 		'http://dbpedia.org/resource/George_Harrison',
+		'http://dbpedia.org/resource/Ringo_Starr',
 		'http://dbpedia.org/resource/Paul_McCartney'
 		];
 	var myVIE = window.myVIE = new VIE();
@@ -31,7 +31,6 @@ $ (function ()  {
 	.using('dbpedia')
 	.execute()
 	.done(function(){
-		
 	});
 });
 
