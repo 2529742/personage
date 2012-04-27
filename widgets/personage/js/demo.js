@@ -18,7 +18,12 @@ $ (function ()  {
 	$('#sample_img').viePersonage({FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd"});
   
 	//Instantiate VIE and load entities
-	var entities = 'http://dbpedia.org/page/John_Lennon';
+	var entities = [
+		'http://dbpedia.org/resource/John_Lennon',
+		'http://dbpedia.org/resource/Ringo_Starr',
+		'http://dbpedia.org/resource/George_Harrison',
+		'http://dbpedia.org/resource/Paul_McCartney'
+		];
 	var myVIE = window.myVIE = new VIE();
 	myVIE.use(new myVIE.DBPediaService());
 	myVIE
@@ -26,7 +31,7 @@ $ (function ()  {
 	.using('dbpedia')
 	.execute()
 	.done(function(){
-		alert('done!');
+		
 	});
 });
 
