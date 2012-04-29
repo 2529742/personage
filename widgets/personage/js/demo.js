@@ -1,7 +1,7 @@
 $ (function ()  {
 
   var text = ("<h1> The Beatles</h1>" +
-              "<span about= \"http://dbpedia.org/resource/The_Beatles\" typeof= \"Organisation\" > The Beatles </span> were an English rock band formed in Liverpool in 1960," +
+              "The Beatles were an English rock band formed in Liverpool in 1960," +
               " and one of the most commercially successful and critically acclaimed acts in the history of popular music." +
               " The group's best-known lineup consisted of <span about=\"http://dbpedia.org/resource/John_Lennon\" typeof= \"Person\"> John Lennon </span> (rhythm guitar, vocals)," +
               " <span about=\"http://dbpedia.org/resource/Paul_McCartney\" typeof=\"Person\"> Paul McCartney </span> (bass guitar, vocals)," +
@@ -18,7 +18,24 @@ $ (function ()  {
 	replaceImage (urlImage);
 	//initialize face tagger 
 	$('#sample_img').viePersonage({FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd"});
-  
+	//activate droppables
+	$('[tid]').livequery(function(){
+				$(this).droppable({
+					drop: function(event,ui) {
+						var tid = $(this).attr('id');
+						var draggable = ui.draggable;
+						var tag_text = $(draggable).text();
+						$('[id="' + tid + '"] > .f_tag_caption > span').text(tag_text);
+//						alert('dropped'); 
+					}
+				});
+	});
+
+	var persons = $('#content').children('[typeof="Person"]');
+	$(persons).each(function(){
+		entityDrag(this);
+	});
+	
 	//Instantiate VIE and load entities
 	var entities = [
 		'http://dbpedia.org/resource/John_Lennon',
@@ -37,9 +54,21 @@ $ (function ()  {
 });
 
 function replaceText(text) {
-  $("#content").html(text);
+	$("#content").html(text);
 };
 
 function replaceImage(urlImage) {
-  $("#sample_img").attr('src', urlImage);
+	$("#sample_img").attr('src', urlImage);
 };
+
+function entityDrag(element){
+	$(element).draggable({
+		stop: function(){
+			$(this).css({
+				left: '',
+				top: ''
+			});
+		}
+	});
+	
+}

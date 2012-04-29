@@ -6,6 +6,9 @@
        },
        
        _init: function () {
+			if(!myVIE){
+				var myVIE = window.myVIE = new VIE();
+			}
 			var self = this;
 			var img_id = $(self.element).attr('id');
 			this.tagFace(img_id,this.annotate_faces);
@@ -28,7 +31,12 @@
         },
 		
 		annotate_faces: function(tags) {
-		
+			for(var t in tags){
+				var tag = tags[t];
+				var id = tag.tid;
+				var type = '<http://schema.org/MediaObject>';
+				//myVIE.Entity({'@type':type, '@subject': id}, undefined);	
+			}
 		},
         
         options: {
