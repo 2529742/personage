@@ -6,12 +6,31 @@
        },
        
        _init: function () {
-			if(!myVIE){
-				var myVIE = window.myVIE = new VIE();
-			}
 			var self = this;
 			var img_id = $(self.element).attr('id');
 			this.tagFace(img_id,this.annotate_faces);
+			//activate droppables
+			$('[tid]').livequery(function(){
+				$(this).droppable({
+					drop: function(event,ui) {
+						var tid = $(this).attr('tid');
+						var draggable = ui.draggable;
+						var draggable_about = $(draggable).attr('about');
+						var tag_text = $(draggable).text();
+						$('[tid="' + tid + '"] > .f_tag_caption > span')
+						.text(tag_text)
+						.trigger('keyup');
+						var personEntity = myVIE.entities.get(draggable_about);
+						if(personEntity){
+							personEntity.setOrAdd('annotatedIMG',tid);
+						}
+						var mediaEntity = myVIE.entities.get(tid);
+						if(mediaEntity){
+							mediaEntity.setOrAdd('annotatedPerson',draggable_about);
+						}
+					}
+				});
+			});
        },
 
        tagFace: function(img_id, callback) {
@@ -33,9 +52,9 @@
 		annotate_faces: function(tags) {
 			for(var t in tags){
 				var tag = tags[t];
-				var id = tag.tid;
+				var tid = tag.tid;
 				var type = '<http://schema.org/MediaObject>';
-				//myVIE.Entity({'@type':type, '@subject': id}, undefined);	
+				myVIE.entities.add({'@type':type, '@subject': tid});	
 			}
 		},
         
