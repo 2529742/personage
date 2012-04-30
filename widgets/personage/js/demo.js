@@ -16,26 +16,7 @@ $ (function ()  {
 	replaceText(text);
 	urlImage = 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG';
 	replaceImage (urlImage);
-	//initialize face tagger 
-	$('#sample_img').viePersonage({FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd"});
-	//activate droppables
-	$('[tid]').livequery(function(){
-				$(this).droppable({
-					drop: function(event,ui) {
-						var tid = $(this).attr('id');
-						var draggable = ui.draggable;
-						var tag_text = $(draggable).text();
-						$('[id="' + tid + '"] > .f_tag_caption > span').text(tag_text);
-//						alert('dropped'); 
-					}
-				});
-	});
 
-	var persons = $('#content').children('[typeof="Person"]');
-	$(persons).each(function(){
-		entityDrag(this);
-	});
-	
 	//Instantiate VIE and load entities
 	var entities = [
 		'http://dbpedia.org/resource/John_Lennon',
@@ -51,6 +32,23 @@ $ (function ()  {
 	.execute()
 	.done(function(){
 	});
+
+	//initialize face tagger 
+	$('#sample_img').viePersonage({FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd"});
+	//activate draggables
+	var persons = $('#content').children('[typeof="Person"]');
+	$(persons).each(function(){
+		entityDrag(this);
+	});
+	
+	$('[tid]').livequery('hover',function(){
+			var tid = $(this).attr('tid');
+			var entity = myVIE.entities.get(tid);
+			if(entity){
+				var subject = entity.get('_base: annotatedPerson');
+			}
+	});
+	
 });
 
 function replaceText(text) {
