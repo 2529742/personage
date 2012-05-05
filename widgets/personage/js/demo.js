@@ -43,9 +43,15 @@ $ (function ()  {
 	
 	$('[tid]').livequery('hover',function(){
 			var tid = $(this).attr('tid');
-			var entity = myVIE.entities.get(tid);
+			var x = $(this).attr('fx');
+			var y = $(this).attr('fy');
+			var h = $(this).attr('fheight');
+			var w = $(this).attr('fwidth');
+			var photo_url = $(this).attr('fsrc');
+			var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
+			var entity = myVIE.entities.get(fragment_id);
 			if(entity){
-				var subject = entity.get('_base: annotatedPerson');
+				var subject = entity.get('_base: about');
 			}
 	});
 	
