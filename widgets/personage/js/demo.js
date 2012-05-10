@@ -40,6 +40,32 @@ $ (function ()  {
 	$(persons).each(function(){
 		entityDrag(this);
 	});
+
+	$(persons).each(function() {
+        	$(this).hover(
+			function()  { 
+		            console.log ("this" + this);
+        		    var about = $(this).attr('about');
+        	            var person_entity= myVIE.entities.get(about);
+        		    console.log (person_entity);
+	        	    if (person_entity) {
+        	        	var annotatatedIMG = person_entity.get ('annotatedIMG');
+	                	var imgElement= $('[tid = "' + annotatedIMG + '"]');
+		                $(imgElement).css("{border: 1 px solid navy }"); 
+        		    }
+		        }, 
+			function() { 
+				var about = $(this).attr('about');
+				var person_entity= myVIE.entites.get(about);
+				console.log (person_entity);
+				if (person_entity) {
+					var annotatatedIMG = person_entity.get ('annotatedIMG');
+					var imgElement= $('[tid = "' + annotatedIMG + '"]');
+					$(imgElement).css("{border: 0 px}");
+				}; 
+			}   
+		)
+	});
 	
 	$('[tid]').livequery('hover',function(){
 			var tid = $(this).attr('tid');
@@ -54,7 +80,7 @@ $ (function ()  {
 				var subject = entity.get('_base: about');
 			}
 	});
-	
+
 });
 
 function replaceText(text) {
@@ -74,5 +100,7 @@ function entityDrag(element){
 			});
 		}
 	});
+	
+	
 	
 }
