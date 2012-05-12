@@ -60,7 +60,9 @@ $ (function ()  {
 	        var photo_url = mediaEntity.get('photo_url');
 	        var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
 	        $(imgElement).css("{border: 1px solid navy; }"); 
+             }
            }, 
+
              function()  { 
 	       var about = $(this).attr('about');
                var person_entity= myVIE.entities.get(about);
@@ -74,10 +76,9 @@ $ (function ()  {
 	         var photo_url = mediaEntity.get('photo_url');
 	         var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
 		 $(imgElement).css("{border: 0px;}");
-        		}
-		    }
-		   
-		)
+               }
+            }
+        )
 	});
 	
 			
