@@ -40,33 +40,45 @@ $ (function ()  {
 	$(persons).each(function(){
 		entityDrag(this);
 	});
-
+  
+  //highlight photo on hover
 	$(persons).each(function() {
-        	$(this).hover(
-			function()  { 
-		            console.log ("this" + this);
-        		    var about = $(this).attr('about');
-        	            var person_entity= myVIE.entities.get(about);
-        		    console.log (person_entity);
-	        	    if (person_entity) {
-        	        	var annotatatedIMG = person_entity.get ('annotatedIMG');
-	                	var imgElement= $('[tid = "' + annotatedIMG + '"]');
-		                $(imgElement).css("{border: 1 px solid navy }"); 
-        		    }
-		        }, 
-			function() { 
-				var about = $(this).attr('about');
-				var person_entity= myVIE.entites.get(about);
-				console.log (person_entity);
-				if (person_entity) {
-					var annotatatedIMG = person_entity.get ('annotatedIMG');
-					var imgElement= $('[tid = "' + annotatedIMG + '"]');
-					$(imgElement).css("{border: 0 px}");
-				}; 
-			}   
+    $(this).hover(
+		  	function()  { 
+		        var about = $(this).attr('about');
+        	  var person_entity= myVIE.entities.get(about);
+        		if (person_entity) {
+        	      var fragment_id = person_entity.get ('annotatedIMG');
+        	      var mediaEntity = myVIE.entities.get(fragment_id);
+        	      var height = mediaEntity.get('h');
+	              var width = mediaEntity.get('w');
+	              var x = mediaEntity.get('x');
+	              var y = mediaEntity.get('y');
+	              var photo_url = mediaEntity.get('photo_url');
+	              var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
+		            $(imgElement).css("{border: 1px solid navy; }"); 
+        		}
+		    }, 
+		    function()  { 
+		        var about = $(this).attr('about');
+        	  var person_entity= myVIE.entities.get(about);
+        		if (person_entity) {
+        	      var fragment_id = person_entity.get ('annotatedIMG');
+        	      var mediaEntity = myVIE.entities.get(fragment_id);
+        	      var height = mediaEntity.get('h');
+	              var width = mediaEntity.get('w');
+	              var x = mediaEntity.get('x');
+	              var y = mediaEntity.get('y');
+	              var photo_url = mediaEntity.get('photo_url');
+	              var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
+		            $(imgElement).css("{border: 0px;}");
+        		}
+		    }
+		   
 		)
 	});
 	
+			
 	$('[tid]').livequery('hover',function(){
 			var tid = $(this).attr('tid');
 			var x = $(this).attr('fx');
@@ -83,15 +95,15 @@ $ (function ()  {
 
 });
 
-function replaceText(text) {
+  function replaceText(text) {
 	$("#content").html(text);
-};
+  };
 
-function replaceImage(urlImage) {
+  function replaceImage(urlImage) {
 	$("#sample_img").attr('src', urlImage);
-};
+  };
 
-function entityDrag(element){
+  function entityDrag(element){
 	$(element).draggable({
 		stop: function(){
 			$(this).css({
@@ -100,7 +112,4 @@ function entityDrag(element){
 			});
 		}
 	});
-	
-	
-	
-}
+ }

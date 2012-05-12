@@ -5,7 +5,7 @@
             return this;
        },
        
-       _init: function () {
+    _init: function () {
 			var self = this;
 			var img_id = $(self.element).attr('id');
 			this.tagFace(img_id,this.annotate_faces);
@@ -39,8 +39,8 @@
 			});
        },
 
-       tagFace: function(img_id, callback) {
-            FaceTagger.load('#' + img_id, {
+    tagFace: function(img_id, callback) {
+      FaceTagger.load('#' + img_id, {
                 click_add_tag: false,
                 resizable: true,
                 facebook: true,
@@ -48,17 +48,17 @@
                 tags_list: true,
                 add_tag_button: true,
                 demo_mode: true,
-				success: function(img, response){
+			  success: function(img, response){
 					var photos = response.photos? response.photos: [];
 					for(var i = 0; i < photos.length; i++){
-						var photo = photos[i];
-						callback(photo);
+					var photo = photos[i];
+					callback(photo);
 					}
-				}
-           });
-        },
+		   }
+     });
+    },
 		
-		annotate_faces: function(photo) {
+    annotate_faces: function(photo) {
 			var photo_url = photo.url;
 			var tags = photo.tags;
 			for(var t in tags){
@@ -73,12 +73,20 @@
 				if(id){
 					myVIE.entities.add({'@type':type, '@subject': id});	
 				}
+				var mediaEntity = myVIE.entities.get(id);
+				if(mediaEntity){
+				  mediaEntity.setOrAdd('h',h);
+					mediaEntity.setOrAdd('w',w);
+					mediaEntity.setOrAdd('x',x);
+					mediaEntity.setOrAdd('y',y);
+					mediaEntity.setOrAdd('photo_url',photo_url);
+			  }
 			}
+			
 		},
         
-        options: {
-           FACE_API_KEY: undefined
+    options: {
+      FACE_API_KEY: undefined
         }
-
     });
 })(jQuery);
