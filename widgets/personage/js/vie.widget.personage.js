@@ -9,6 +9,7 @@
 			var self = this;
 			var img_id = $(self.element).attr('id');
 			this.tagFace(img_id,this.annotate_faces);
+			self.options.myVIE.types.get("Thing").attributes.add("annotatedIMG", ["MediaObject"]);
 			//activate droppables
 			$('[tid]').livequery(function(){
 				$(this).droppable({
@@ -26,11 +27,11 @@
 						var tag_text = $(draggable).text();
 						$('[tid="' + tid + '"] > .f_tag_caption > span')
 						.text(tag_text);
-						var personEntity = myVIE.entities.get(draggable_about);
+						var personEntity = self.options.myVIE.entities.get(draggable_about);
 						if(personEntity){
 							personEntity.setOrAdd('annotatedIMG',fragment_id);
 						}
-						var mediaEntity = myVIE.entities.get(fragment_id);
+						var mediaEntity = self.options.myVIE.entities.get(fragment_id);
 						if(mediaEntity){
 							mediaEntity.setOrAdd('about',draggable_about);
 						}
@@ -71,13 +72,14 @@
 				var id  = (h && w && x && y)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
 				var type = '<http://schema.org/MediaObject>';
 				if(id){
-					myVIE.entities.add({'@type':type, '@subject': id});	
+					this.options.myVIE.entities.add({'@type':type, '@subject': id});	
 				}
 			}
 		},
         
         options: {
-           FACE_API_KEY: undefined
+           FACE_API_KEY: undefined,
+		   myVIE: undefined
         }
 
     });
