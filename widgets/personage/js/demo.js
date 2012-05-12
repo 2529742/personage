@@ -59,7 +59,7 @@ $ (function ()  {
                     var y = mediaEntity.get('y');
                     var photo_url = mediaEntity.get('photo_url');
                     var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
-                    $(imgElement).css("{border: 1px solid navy; }"); 
+                    $(imgElement).addClass("f_tag_trans_hover");
                 }
             }, 
 
@@ -75,7 +75,7 @@ $ (function ()  {
                     var y = mediaEntity.get('y');
                     var photo_url = mediaEntity.get('photo_url');
                     var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'"][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
-                    $(imgElement).css("{border: 0px;}");
+                    $(imgElement).removeClass("f_tag_trans_hover");
                 }
             }
         )

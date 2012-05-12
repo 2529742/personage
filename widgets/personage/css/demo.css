@@ -82,3 +82,8 @@ a {
     text-decoration: none;
     color: #1b1eb4;
 }
+
+.f_tag_trans_hover {
+    border: 2px;
+    color: navy;
+}
