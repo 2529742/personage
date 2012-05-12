@@ -43,38 +43,37 @@ $ (function ()  {
 	$(persons).each(function(){
 		entityDrag(this);
 	});
-  
+    
   //highlight photo on hover
 	$(persons).each(function() {
-    $(this).hover(
-		  	function()  { 
-		        var about = $(this).attr('about');
-        	  var person_entity= myVIE.entities.get(about);
-        		if (person_entity) {
-        	      var fragment_id = person_entity.get ('annotatedIMG');
-        	      var mediaEntity = myVIE.entities.get(fragment_id);
-        	      var height = mediaEntity.get('h');
-	              var width = mediaEntity.get('w');
-	              var x = mediaEntity.get('x');
-	              var y = mediaEntity.get('y');
-	              var photo_url = mediaEntity.get('photo_url');
-	              var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
-		            $(imgElement).css("{border: 1px solid navy; }"); 
-        		}
-		    }, 
-		    function()  { 
-		        var about = $(this).attr('about');
-        	  var person_entity= myVIE.entities.get(about);
-        		if (person_entity) {
-        	      var fragment_id = person_entity.get ('annotatedIMG');
-        	      var mediaEntity = myVIE.entities.get(fragment_id);
-        	      var height = mediaEntity.get('h');
-	              var width = mediaEntity.get('w');
-	              var x = mediaEntity.get('x');
-	              var y = mediaEntity.get('y');
-	              var photo_url = mediaEntity.get('photo_url');
-	              var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
-		            $(imgElement).css("{border: 0px;}");
+          $(this).hover(
+            function()  { 
+              var about = $(this).attr('about');
+              var person_entity= myVIE.entities.get(about);
+              if (person_entity) {
+                var fragment_id = person_entity.get ('annotatedIMG');
+                var mediaEntity = myVIE.entities.get(fragment_id);
+                var height = mediaEntity.get('h');
+	        var width = mediaEntity.get('w');
+	        var x = mediaEntity.get('x');
+	        var y = mediaEntity.get('y');
+	        var photo_url = mediaEntity.get('photo_url');
+	        var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
+	        $(imgElement).css("{border: 1px solid navy; }"); 
+           }, 
+             function()  { 
+	       var about = $(this).attr('about');
+               var person_entity= myVIE.entities.get(about);
+               if (person_entity) {
+                 var fragment_id = person_entity.get ('annotatedIMG');
+        	 var mediaEntity = myVIE.entities.get(fragment_id);
+        	 var height = mediaEntity.get('h');
+	         var width = mediaEntity.get('w');
+	         var x = mediaEntity.get('x');
+	         var y = mediaEntity.get('y');
+	         var photo_url = mediaEntity.get('photo_url');
+	         var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
+		 $(imgElement).css("{border: 0px;}");
         		}
 		    }
 		   
