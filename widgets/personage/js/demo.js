@@ -13,106 +13,106 @@ $ (function ()  {
               " as their songwriting grew in sophistication by the late 1960s," +
               " they came to be perceived by many fans and cultural observers as" +
               " an embodiment of the ideals shared by the era's sociocultural revolutions.");
-	replaceText(text);
-	urlImage = 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG';
-	replaceImage (urlImage);
+    replaceText(text);
+    urlImage = 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG';
+    replaceImage (urlImage);
 
-	//Instantiate VIE and load entities
-	var entities = [
-		'http://dbpedia.org/resource/John_Lennon',
-		'http://dbpedia.org/resource/George_Harrison',
-		'http://dbpedia.org/resource/Ringo_Starr',
-		'http://dbpedia.org/resource/Paul_McCartney'
-		];
-	var myVIE = window.myVIE = new VIE();
-	myVIE.use(new myVIE.DBPediaService());
-	myVIE
-	.load({entity: entities})
-	.using('dbpedia')
-	.execute()
-	.done(function(){
-	});
+    //Instantiate VIE and load entities
+    var entities = [
+        'http://dbpedia.org/resource/John_Lennon',
+        'http://dbpedia.org/resource/George_Harrison',
+        'http://dbpedia.org/resource/Ringo_Starr',
+        'http://dbpedia.org/resource/Paul_McCartney'
+    ];
+    var myVIE = window.myVIE = new VIE();
+    myVIE.use(new myVIE.DBPediaService());
+    myVIE
+    .load({entity: entities})
+    .using('dbpedia')
+    .execute()
+    .done(function(){
+    });
 
-	//initialize face tagger 
-	$('#sample_img').viePersonage({
-		FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
-		myVIE: myVIE
-	});
-	//activate draggables
-	var persons = $('#content').children('[typeof="Person"]');
-	$(persons).each(function(){
-		entityDrag(this);
-	});
+    //initialize face tagger 
+    $('#sample_img').viePersonage({
+        FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
+        myVIE: myVIE
+    });
+    //activate draggables
+    var persons = $('#content').children('[typeof="Person"]');
+    $(persons).each(function(){
+        entityDrag(this);
+    });
     
   //highlight photo on hover
-	$(persons).each(function() {
-          $(this).hover(
-            function()  { 
-              var about = $(this).attr('about');
-              var person_entity= myVIE.entities.get(about);
-              if (person_entity) {
-                var fragment_id = person_entity.get ('annotatedIMG');
-                var mediaEntity = myVIE.entities.get(fragment_id);
-                var height = mediaEntity.get('h');
-	        var width = mediaEntity.get('w');
-	        var x = mediaEntity.get('x');
-	        var y = mediaEntity.get('y');
-	        var photo_url = mediaEntity.get('photo_url');
-	        var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
-	        $(imgElement).css("{border: 1px solid navy; }"); 
-             }
-           }, 
+    $(persons).each(function() {
+        $(this).hover(
+            function()  {
+                var about = $(this).attr('about');
+                var person_entity= myVIE.entities.get(about);
+                if (person_entity) {
+                    var fragment_id = person_entity.get ('annotatedIMG');
+                    var mediaEntity = myVIE.entities.get(fragment_id);
+                    var height = mediaEntity.get('h');
+                    var width = mediaEntity.get('w');
+                    var x = mediaEntity.get('x');
+                    var y = mediaEntity.get('y');
+                    var photo_url = mediaEntity.get('photo_url');
+                    var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+                    $(imgElement).css("{border: 1px solid navy; }"); 
+                }
+            }, 
 
-             function()  { 
-	       var about = $(this).attr('about');
-               var person_entity= myVIE.entities.get(about);
-               if (person_entity) {
-                 var fragment_id = person_entity.get ('annotatedIMG');
-        	 var mediaEntity = myVIE.entities.get(fragment_id);
-        	 var height = mediaEntity.get('h');
-	         var width = mediaEntity.get('w');
-	         var x = mediaEntity.get('x');
-	         var y = mediaEntity.get('y');
-	         var photo_url = mediaEntity.get('photo_url');
-	         var imgElement = $('[fheight= "'+ height + '"] [fwidth= "'+ width +'" ] [fx= "'+ x +'"] [fy= "'+ y +'"] [fphoto_url= "'+ photo_url+'"]');
-		 $(imgElement).css("{border: 0px;}");
-               }
+            function()  { 
+                var about = $(this).attr('about');
+                var person_entity= myVIE.entities.get(about);
+                if (person_entity) {
+                    var fragment_id = person_entity.get ('annotatedIMG');
+                    var mediaEntity = myVIE.entities.get(fragment_id);
+                    var height = mediaEntity.get('h');
+                    var width = mediaEntity.get('w');
+                    var x = mediaEntity.get('x');
+                    var y = mediaEntity.get('y');
+                    var photo_url = mediaEntity.get('photo_url');
+                    var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'"][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+                    $(imgElement).css("{border: 0px;}");
+                }
             }
         )
-	});
-	
-			
-	$('[tid]').livequery('hover',function(){
-			var tid = $(this).attr('tid');
-			var x = $(this).attr('fx');
-			var y = $(this).attr('fy');
-			var h = $(this).attr('fheight');
-			var w = $(this).attr('fwidth');
-			var photo_url = $(this).attr('fsrc');
-			var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
-			var entity = myVIE.entities.get(fragment_id);
-			if(entity){
-				var subject = entity.get('_base: about');
-			}
-	});
+    });
+    
+            
+    $('[tid]').livequery('hover',function(){
+            var tid = $(this).attr('tid');
+            var x = $(this).attr('fx');
+            var y = $(this).attr('fy');
+            var h = $(this).attr('fheight');
+            var w = $(this).attr('fwidth');
+            var photo_url = $(this).attr('fsrc');
+            var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
+            var entity = myVIE.entities.get(fragment_id);
+            if(entity){
+                var subject = entity.get('_base: about');
+            }
+    });
 
 });
 
   function replaceText(text) {
-	$("#content").html(text);
+    $("#content").html(text);
   };
 
   function replaceImage(urlImage) {
-	$("#sample_img").attr('src', urlImage);
+    $("#sample_img").attr('src', urlImage);
   };
 
   function entityDrag(element){
-	$(element).draggable({
-		stop: function(){
-			$(this).css({
-				left: '',
-				top: ''
-			});
-		}
-	});
+    $(element).draggable({
+        stop: function(){
+            $(this).css({
+                left: '',
+                top: ''
+            });
+        }
+    });
  }
