@@ -9,7 +9,7 @@
 			var self = this;
 			var img_id = $(self.element).attr('id');
 			var v = self.options.myVIE;
-			this.tagFace(img_id,this.annotate_faces);
+			this.tagFace(img_id,this.annotate_faces,v);
 			if(v.types.get("owl:Thing")){
 				v.types.get("owl:Thing").attributes.add("annotatedIMG", ["MediaObject"]);
 			}
