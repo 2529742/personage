@@ -17,6 +17,7 @@
             $('[tid]').livequery(function(){
                 $(this).droppable({
                     drop: function(event,ui) {
+						var tid = $(this).attr('tid');
 						var fragment_id = self.parseFragmentId(this);
                         var draggable = ui.draggable;
                         var draggable_about = $(draggable).attr('about');
