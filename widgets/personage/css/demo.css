@@ -28,7 +28,7 @@ h1,h2,h3,h4 {
 
 #container {
     width: 900px;
-	font-size: 120%;
+	font-size: 150%;
 	margin: 8em auto 0px auto;
 }
 
@@ -83,7 +83,13 @@ a {
     color: #1b1eb4;
 }
 
-.f_tag_trans_hover {
-    border: 2px;
-    color: navy;
+[about] {
+	text-shadow: 0 0 0.1em #87F;
+	cursor: move;
+	z-index: 9999;
+}
+
+.hover{
+	text-shadow: 1px 1px 4px #87F;
+	
 }
