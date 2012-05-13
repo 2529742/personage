@@ -40,6 +40,7 @@
 						var mediaEntity = myVIE.entities.get(fragment_id);
 						if(mediaEntity){
 							var about = mediaEntity.get('about');
+							about = about.isEntity? about.getSubjectUri(): about;
 							//var personEntity = v.entities.get(about);
 							$('[about="' + about + '"]').addClass('hover');
 						}
@@ -49,6 +50,7 @@
 						var mediaEntity = myVIE.entities.get(fragment_id);
 						if(mediaEntity){
 							var about = mediaEntity.get('about');
+							about = about.isEntity? about.getSubjectUri(): about;
 							//var personEntity = v.entities.get(about);
 							$('[about="' + about + '"]').removeClass('hover');
 						}
