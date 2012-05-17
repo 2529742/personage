@@ -17,14 +17,8 @@
             $('[tid]').livequery(function(){
                 $(this).droppable({
                     drop: function(event,ui) {
-                        var tid = $(this).attr('tid');
-                        var x = $(this).attr('fx');
-                        var y = $(this).attr('fy');
-                        var h = $(this).attr('fheight');
-                        var w = $(this).attr('fwidth');
-                        var photo_url = $(this).attr('fsrc');
-                        var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
-                        
+						var tid = $(this).attr('tid');
+						var fragment_id = self.parseFragmentId(this);
                         var draggable = ui.draggable;
                         var draggable_about = $(draggable).attr('about');
                         var tag_text = $(draggable).text();
@@ -40,6 +34,28 @@
                         }
                     }
                 });
+				$(this).hover(
+					function(){
+						var fragment_id = self.parseFragmentId(this);
+						var mediaEntity = myVIE.entities.get(fragment_id);
+						if(mediaEntity){
+							var about = mediaEntity.get('about');
+							about = about.isEntity? about.getSubjectUri(): about;
+							//var personEntity = v.entities.get(about);
+							$('[about="' + about + '"]').addClass('hover');
+						}
+					},
+					function(){
+						var fragment_id = self.parseFragmentId(this);
+						var mediaEntity = myVIE.entities.get(fragment_id);
+						if(mediaEntity){
+							var about = mediaEntity.get('about');
+							about = about.isEntity? about.getSubjectUri(): about;
+							//var personEntity = v.entities.get(about);
+							$('[about="' + about + '"]').removeClass('hover');
+						}
+					}
+				);
             });
        },
 
@@ -87,6 +103,17 @@
             }
         }
     },
+	
+	parseFragmentId: function(element){
+		var tid = $(element).attr('tid');
+		var x = $(element).attr('fx');
+		var y = $(element).attr('fy');
+		var h = $(element).attr('fheight');
+		var w = $(element).attr('fwidth');
+		var photo_url = $(element).attr('fsrc');
+		var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
+		return fragment_id;
+	},
         
     options: {
        FACE_API_KEY: undefined,
