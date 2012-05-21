@@ -95,11 +95,11 @@
             }
             var mediaEntity = myVIE.entities.get(id);
             if(mediaEntity){
-                mediaEntity.setOrAdd('h',h);
-                mediaEntity.setOrAdd('w',w);
+                mediaEntity.setOrAdd('height',h);
+                mediaEntity.setOrAdd('width',w);
                 mediaEntity.setOrAdd('x',x);
                 mediaEntity.setOrAdd('y',y);
-                mediaEntity.setOrAdd('photo_url',photo_url);
+                mediaEntity.setOrAdd('image',photo_url);
             }
         }
     },

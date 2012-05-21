@@ -69,11 +69,11 @@ $ (function ()  {
                 if (person_entity) {
                     var fragment_id = person_entity.get ('annotatedIMG');
                     var mediaEntity = myVIE.entities.get(fragment_id);
-                    var height = mediaEntity.get('h');
-                    var width = mediaEntity.get('w');
+                    var height = mediaEntity.get('height');
+                    var width = mediaEntity.get('width');
                     var x = mediaEntity.get('x');
                     var y = mediaEntity.get('y');
-                    var photo_url = mediaEntity.get('photo_url');
+                    var photo_url = mediaEntity.get('image');
                     var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'"][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
                     $(imgElement).removeClass("f_tag_trans_hover");
                 }
