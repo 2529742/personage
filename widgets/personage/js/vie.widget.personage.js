@@ -30,7 +30,7 @@
                         }
                         var mediaEntity = v.entities.get(fragment_id);
                         if(mediaEntity){
-                            mediaEntity.setOrAdd('about',draggable_about);
+                            mediaEntity.setOrAdd('schema:about',draggable_about);
                         }
                     }
                 });
@@ -39,7 +39,7 @@
 						var fragment_id = self.parseFragmentId(this);
 						var mediaEntity = myVIE.entities.get(fragment_id);
 						if(mediaEntity){
-							var about = mediaEntity.get('about');
+							var about = mediaEntity.get('schema:about');
 							about = about.isEntity? about.getSubjectUri(): about;
 							//var personEntity = v.entities.get(about);
 							$('[about="' + about + '"]').addClass('hover');
@@ -49,7 +49,7 @@
 						var fragment_id = self.parseFragmentId(this);
 						var mediaEntity = myVIE.entities.get(fragment_id);
 						if(mediaEntity){
-							var about = mediaEntity.get('about');
+							var about = mediaEntity.get('schema:about');
 							about = about.isEntity? about.getSubjectUri(): about;
 							//var personEntity = v.entities.get(about);
 							$('[about="' + about + '"]').removeClass('hover');
@@ -95,11 +95,11 @@
             }
             var mediaEntity = myVIE.entities.get(id);
             if(mediaEntity){
-                mediaEntity.setOrAdd('height',h);
-                mediaEntity.setOrAdd('width',w);
+                mediaEntity.setOrAdd('schema:height',h);
+                mediaEntity.setOrAdd('schema:width',w);
                 mediaEntity.setOrAdd('x',x);
                 mediaEntity.setOrAdd('y',y);
-                mediaEntity.setOrAdd('image',photo_url);
+                mediaEntity.setOrAdd('schema:image',photo_url);
             }
         }
     },
