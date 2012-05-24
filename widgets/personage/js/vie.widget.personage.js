@@ -99,6 +99,7 @@
             var x = tag.center? tag.center.x: undefined;
             var y = tag.center? tag.center.y: undefined;
             var id  = (h && w && x && y)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
+			id = '<' + id + '>';
             var type = '<http://schema.org/MediaObject>';
             if(id){
                 v.entities.add({'@type':type, '@subject': id});    
