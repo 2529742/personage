@@ -19,6 +19,7 @@
                     drop: function(event,ui) {
 						var tid = $(this).attr('tid');
 						var fragment_id = self.parseFragmentId(this);
+						fragment_id = '<' + fragment_id + '>';
                         var draggable = ui.draggable;
                         var draggable_about = $(draggable).attr('about');
                         var tag_text = $(draggable).text();
@@ -81,6 +82,15 @@
     annotate_faces: function(photo,v) {
         var photo_url = photo.url;
         var tags = photo.tags;
+		var imageSubject = '<' + photo_url + '>';
+		var imageEntity = undefined;
+		if(v.entities.get(imageSubject)){
+			imageEntity = v.entities.get(imageSubject);
+		}
+		else{
+			v.entities.add({'@type': '<http://schema.org/MediaObject>', '@subject': imageSubject});
+			imageEntity = v.entities.get(imageSubject);
+		}
         for(var t in tags){
             var tag = tags[t];
             var tid = tag.tid;
@@ -100,6 +110,9 @@
                 mediaEntity.setOrAdd('x',x);
                 mediaEntity.setOrAdd('y',y);
                 mediaEntity.setOrAdd('schema:image',photo_url);
+				if(imageEntity){
+					imageEntity.setOrAdd('decomposition',id);
+				}
             }
         }
     },
