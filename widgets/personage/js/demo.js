@@ -33,11 +33,6 @@ $ (function ()  {
     .done(function(){
     });
 
-    //initialize face tagger 
-    $('#sample_img').viePersonage({
-        FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
-        myVIE: myVIE
-    });
     //activate draggables
     var persons = $('#content').children('[typeof="Person"]');
     $(persons).each(function(){
@@ -51,53 +46,42 @@ $ (function ()  {
                 var about = $(this).attr('about');
                 var person_entity= myVIE.entities.get(about);
                 if (person_entity) {
-                    var fragment_id = person_entity.get ('annotatedIMG');
-                    var mediaEntity = myVIE.entities.get(fragment_id);
-                    var height = mediaEntity.get( 'schema:height');
-                    var width = mediaEntity.get('schema:width');
-                    var x = mediaEntity.get('x');
-                    var y = mediaEntity.get('y');
-                    var photo_url = mediaEntity.get('schema:image');
-                    var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+                    var imgElement = getImage(person_entity);
                     $(imgElement).addClass("f_tag_trans_hover");
                 }
             }, 
-
             function()  { 
                 var about = $(this).attr('about');
                 var person_entity= myVIE.entities.get(about);
                 if (person_entity) {
-                    var fragment_id = person_entity.get ('annotatedIMG');
-                    var mediaEntity = myVIE.entities.get(fragment_id);
-                    var height = mediaEntity.get('schema:height');
-                    var width = mediaEntity.get('schema:width');
-                    var x = mediaEntity.get('x');
-                    var y = mediaEntity.get('y');
-                    var photo_url = mediaEntity.get('schema:image');
-                    var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'"][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+                    var imgElement = getImage(person_entity);
                     $(imgElement).removeClass("f_tag_trans_hover");
                 }
             }
         )
     });
-    
-            
-    $('[tid]').livequery('hover',function(){
-            var tid = $(this).attr('tid');
-            var x = $(this).attr('fx');
-            var y = $(this).attr('fy');
-            var h = $(this).attr('fheight');
-            var w = $(this).attr('fwidth');
-            var photo_url = $(this).attr('fsrc');
-            var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
-            var entity = myVIE.entities.get(fragment_id);
-            if(entity){
-                var subject = entity.get('_base: about');
-            }
-    });
-
 });
 
+function getImage(person_entity){
+	var fragment_id = person_entity.get ('annotatedIMG');
+	var mediaEntity = myVIE.entities.get(fragment_id);
+	var height = mediaEntity.get( 'schema:height');
+	var width = mediaEntity.get('schema:width');
+	var x = mediaEntity.get('x');
+	var y = mediaEntity.get('y');
+	var photo_url = mediaEntity.get('schema:image');
+	photo_url = mediaEntity.isEntity? photo_url.getSubjectUri(): photo_url.replace(/<|>/,'');
+	var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+	return imgElement;
+}
+
+function startAnnotation(){
+    //initialize face tagger 
+    $('#sample_img').viePersonage({
+        FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
+        myVIE: myVIE
+    });
+}
   function replaceText(text) {
     $("#content").html(text);
   };
