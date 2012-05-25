@@ -77,7 +77,7 @@ function getImage(person_entity){
 
 function startAnnotation(){
     //initialize face tagger 
-    $('#sample_img').viePersonage({
+    $('#photos').viePersonage({
         FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
         myVIE: myVIE
     });

@@ -31,10 +31,10 @@
 		<script type="text/javascript" src="http://api.face.com/lib/api_client.js"></script>
 		<script type="text/javascript" src="http://api.face.com/lib/tagger.js"></script>
 		<!-- Demo specific code -->
-		<!--script type="text/javascript" src="https://raw.github.com/2529742/personage/master/widgets/personage/js/vie.widget.personage.js"></script>-->
-		<script type="text/javascript" src="./js/vie.widget.personage.js"></script>
-		<!--script type="text/javascript" src="https://raw.github.com/2529742/personage/master/widgets/personage/js/demo.js"></script>-->
-		<script type="text/javascript" src="./js/demo.js"></script>
+		<script type="text/javascript" src="https://raw.github.com/2529742/personage/master/widgets/personage/js/vie.widget.personage.js"></script>
+		<!--script type="text/javascript" src="./js/vie.widget.personage.js"></script-->
+		<script type="text/javascript" src="https://raw.github.com/2529742/personage/master/widgets/personage/js/demo.js"></script>
+		<!--script type="text/javascript" src="./js/demo.js"></script-->
     </head>
     <body>
 		<img src="img/iks-logo.jpeg" height="40" style="position:fixed;top:0px;left:0px;" />
@@ -44,6 +44,7 @@
             <div id="widgets">
 				<div id="entity_info"></div>
 				<div id="photos">
+					<button id="start" onclick="startAnnotation()">Start image annotation</button>
 					<img id="sample_img" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG"/>
 				</div>
 			</div>

@@ -7,8 +7,11 @@
        
     _init: function () {
             var self = this;
-            var img_id = $(self.element).attr('id');
             var v = self.options.myVIE;
+			var img_id = [];
+            $(self.element).find('img').each(function(){
+				img_id.push($(this).attr('id'));
+			});
             this.tagFace(img_id,this.annotate_faces,v);
             if(v.types.get("owl:Thing")){
                 v.types.get("owl:Thing").attributes.add("annotatedIMG", ["MediaObject"]);
@@ -61,7 +64,8 @@
        },
 
     tagFace: function(img_id, callback, v) {
-        FaceTagger.load('#' + img_id, {
+		var selector = "#" + img_id.join(",#");
+        FaceTagger.load(selector, {
             click_add_tag: false,
             resizable: true,
             facebook: true,
