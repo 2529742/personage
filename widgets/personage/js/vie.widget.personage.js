@@ -7,14 +7,14 @@
        
     _init: function () {
             var self = this;
-            var v = self.options.myVIE;
 			var img_id = [];
             $(self.element).find('img').each(function(){
 				img_id.push($(this).attr('id'));
 			});
+            var v = self.options.myVIE;
             this.tagFace(img_id,this.annotate_faces,v);
             if(v.types.get("owl:Thing")){
-                v.types.get("owl:Thing").attributes.add("annotatedIMG", ["MediaObject"]);
+                v.types.get("owl:Thing").attributes.add("annotatedIMG", ["ImageObject"]);
             }
             //activate droppables
             $('[tid]').livequery(function(){
@@ -25,6 +25,7 @@
 						fragment_id = '<' + fragment_id + '>';
                         var draggable = ui.draggable;
                         var draggable_about = $(draggable).attr('about');
+						draggable_about = (draggable_about && !window.VIE.Util.isUri(draggable_about))? '<' + draggable_about + '>': draggable_about;
                         var tag_text = $(draggable).text();
                         $('[tid="' + tid + '"] > .f_tag_caption > span')
                         .text(tag_text);
@@ -92,7 +93,7 @@
 			imageEntity = v.entities.get(imageSubject);
 		}
 		else{
-			v.entities.add({'@type': '<http://schema.org/MediaObject>', '@subject': imageSubject});
+			v.entities.add({'@type': '<http://schema.org/ImageObject>', '@subject': imageSubject});
 			imageEntity = v.entities.get(imageSubject);
 		}
         for(var t in tags){
@@ -102,21 +103,22 @@
             var w = tag.width;
             var x = tag.center? tag.center.x: undefined;
             var y = tag.center? tag.center.y: undefined;
-            var id  = (h && w && x && y)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
-			id = '<' + id + '>';
-            var type = '<http://schema.org/MediaObject>';
-            if(id){
-                v.entities.add({'@type':type, '@subject': id});    
+            var fragment_id  = (h && w && x && y)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
+			var fragment_subject = '<' + fragment_id + '>';
+            var type = '<http://schema.org/ImageObject>';
+            if(fragment_id){
+                v.entities.add({'@type':type, '@subject': fragment_subject});    
             }
-            var mediaEntity = myVIE.entities.get(id);
+            var mediaEntity = myVIE.entities.get(fragment_subject);
             if(mediaEntity){
                 mediaEntity.setOrAdd('schema:height',h);
                 mediaEntity.setOrAdd('schema:width',w);
                 mediaEntity.setOrAdd('x',x);
                 mediaEntity.setOrAdd('y',y);
-                mediaEntity.setOrAdd('schema:image',photo_url);
+                mediaEntity.setOrAdd('parentImage',photo_url);
+				mediaEntity.setOrAdd('schema:image',fragment_id);
 				if(imageEntity){
-					imageEntity.setOrAdd('decomposition',id);
+					imageEntity.setOrAdd('decomposition',fragment_subject);
 				}
             }
         }

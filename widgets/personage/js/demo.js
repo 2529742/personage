@@ -32,7 +32,6 @@ $ (function ()  {
     .execute()
     .done(function(){
     });
-
     //activate draggables
     var persons = $('#content').children('[typeof="Person"]');
     $(persons).each(function(){
@@ -46,16 +45,20 @@ $ (function ()  {
                 var about = $(this).attr('about');
                 var person_entity= myVIE.entities.get(about);
                 if (person_entity) {
-                    var imgElement = getImage(person_entity);
-                    $(imgElement).addClass("f_tag_trans_hover");
+					var images = getImage(person_entity);
+                    $(images).each(function(){
+						$(this).addClass("f_tag_trans_hover");
+					});
                 }
             }, 
             function()  { 
                 var about = $(this).attr('about');
                 var person_entity= myVIE.entities.get(about);
                 if (person_entity) {
-                    var imgElement = getImage(person_entity);
-                    $(imgElement).removeClass("f_tag_trans_hover");
+                    var images = getImage(person_entity);
+                    $(images).each(function(){
+						$(this).removeClass("f_tag_trans_hover");
+					});
                 }
             }
         )
@@ -63,16 +66,21 @@ $ (function ()  {
 });
 
 function getImage(person_entity){
-	var fragment_id = person_entity.get ('annotatedIMG');
-	var mediaEntity = myVIE.entities.get(fragment_id);
-	var height = mediaEntity.get( 'schema:height');
-	var width = mediaEntity.get('schema:width');
-	var x = mediaEntity.get('x');
-	var y = mediaEntity.get('y');
-	var photo_url = mediaEntity.get('schema:image');
-	photo_url = mediaEntity.isEntity? photo_url.getSubjectUri(): photo_url.replace(/<|>/,'');
-	var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
-	return imgElement;
+	var images = [];
+	var fragment_id = person_entity.get('annotatedIMG');
+	fragment_id = jQuery.isArray(fragment_id)? fragment_id: [fragment_id];
+	for(var i = 0; i < fragment_id.length; i++){		
+		var mediaEntity = myVIE.entities.get(fragment_id[i]);
+		var height = mediaEntity.get( 'schema:height');
+		var width = mediaEntity.get('schema:width');
+		var x = mediaEntity.get('x');
+		var y = mediaEntity.get('y');
+		var photo_url = mediaEntity.get('parentImage');
+		photo_url = mediaEntity.isEntity? photo_url.getSubjectUri(): photo_url.replace(/<|>/,'');
+		var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+		images.push(imgElement);
+	}
+	return images;
 }
 
 function startAnnotation(){
