@@ -87,9 +87,11 @@ a {
 	text-shadow: 0 0 0.1em #87F;
 	cursor: move;
 	z-index: 9999;
+	color: blue;
 }
 
 .hover{
-	text-shadow: 1px 1px 4px #87F;
-
+	text-shadow: 2px 2px 5px #87F;
+	color: black;
+	
 }

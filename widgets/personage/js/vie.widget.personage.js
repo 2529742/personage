@@ -7,15 +7,22 @@
        
     _init: function () {
             var self = this;
-			var img_id = [];
-            $(self.element).find('img').each(function(){
-				img_id.push($(this).attr('id'));
-			});
-            var v = self.options.myVIE;
-            this.tagFace(img_id,this.annotate_faces,v);
+			var v = self.options.myVIE;
             if(v.types.get("owl:Thing")){
                 v.types.get("owl:Thing").attributes.add("annotatedIMG", ["ImageObject"]);
             }
+
+			/* var img_id = [];
+			$(self.element).find('img').each(function(){
+				img_id.push($(this).attr('id'));
+			}); 
+			this.tagFace(img_id,this.annotate_faces,v); */
+			var img_src = [];
+			$(self.element).find('img').each(function(){
+				$(this).wrap('<div class="tags" style="position: relative; display: inline-block;">');
+				img_src.push($(this).attr('src'));
+			});
+			this.getTags(img_src, this.annotate_faces, v, self);
             //activate droppables
             $('[tid]').livequery(function(){
                 $(this).droppable({
@@ -63,7 +70,7 @@
 				);
             });
        },
-
+	//Face.com tagging  widget
     tagFace: function(img_id, callback, v) {
 		var selector = "#" + img_id.join(",#");
         FaceTagger.load(selector, {
@@ -83,10 +90,61 @@
             }
         });
     },
-        
-    annotate_faces: function(photo,v) {
+	
+	getTags: function(img_src, callback, v, self){
+		var tags = {};
+		var urls = img_src.join(',');
+		$.ajax({
+			url: 'http://api.face.com/faces/detect.json',
+			type: 'POST',
+			data: {
+				api_key: this.options.FACE_API_KEY,
+				api_secret: this.options.FACE_API_SECRET,
+				urls: urls,
+				attributes: 'all'
+			},
+			success: function(response){
+						var photos = response.photos? response.photos: [];
+						for(var i = 0; i < photos.length; i++){
+							var photo = photos[i];
+							callback(photo,v,self);
+						}
+					 }
+		});
+	},
+    
+	renderTag: function(entityTag, parentEl){
+		var tagView = Backbone.View.extend({
+			className: "f_tag",
+            initialize: function(){
+				this.render();
+			},
+			render: function(){
+				var $el = $(this.el);
+				var mediaEntity = this.model;
+				var h = mediaEntity.get('schema:height');
+				var w = mediaEntity.get('schema:width');
+				var left = parentEl.width()*(mediaEntity.get('x') - w/2)/100;
+				var top = parentEl.height()*(mediaEntity.get('y') - h/2)/100;
+				$el.css({
+					position: 'absolute',
+					border: '2px solid #8EC3CA',
+					top: top,
+					left: left,
+					width: w+'%',
+					height: h+'%',
+					display: 'block'
+				});
+				parentEl.append($el);
+			}
+		});
+		return new tagView({model:entityTag, parentEl:parentEl});
+	},
+    
+    annotate_faces: function(photo,v, self) {
         var photo_url = photo.url;
         var tags = photo.tags;
+		var parentEl = $(self.element).find('[src="' + photo_url + '"]').parent();
 		var imageSubject = '<' + photo_url + '>';
 		var imageEntity = undefined;
 		if(v.entities.get(imageSubject)){
@@ -120,6 +178,7 @@
 				if(imageEntity){
 					imageEntity.setOrAdd('decomposition',fragment_subject);
 				}
+				self.renderTag(mediaEntity, parentEl);
             }
         }
     },
@@ -137,6 +196,7 @@
         
     options: {
        FACE_API_KEY: undefined,
+	   FACE_API_SECRET: undefined,
        myVIE: undefined
     }
     });

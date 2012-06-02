@@ -87,6 +87,7 @@ function startAnnotation(){
     //initialize face tagger 
     $('#photos').viePersonage({
         FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
+		FACE_API_SECRET: "36358726496a759433291efe408da188",
         myVIE: myVIE
     });
 }
