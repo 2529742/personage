@@ -34,6 +34,7 @@
                         var draggable_about = $(draggable).attr('about');
 						draggable_about = (draggable_about && !window.VIE.Util.isUri(draggable_about))? '<' + draggable_about + '>': draggable_about;
                         var tag_text = $(draggable).text();
+                        var destination = $('[tid="' + tid + '"] > .f_tag_caption > span');
                         $('[tid="' + tid + '"] > .f_tag_caption > span')
                         .text(tag_text);
                         var personEntity = v.entities.get(draggable_about);
@@ -122,6 +123,9 @@
 			render: function(){
 				var $el = $(this.el);
 				var mediaEntity = this.model;
+                $el.attr('tid', mediaEntity.get('tid'));
+                var container = $("<div class='f_tag_caption'><span></span></div>");
+                $el.append(container);
 				var h = mediaEntity.get('schema:height');
 				var w = mediaEntity.get('schema:width');
 				var left = parentEl.width()*(mediaEntity.get('x') - w/2)/100;
@@ -173,6 +177,7 @@
                 mediaEntity.setOrAdd('schema:width',w);
                 mediaEntity.setOrAdd('x',x);
                 mediaEntity.setOrAdd('y',y);
+                mediaEntity.setOrAdd('tid', tid);
                 mediaEntity.setOrAdd('parentImage',photo_url);
 				mediaEntity.setOrAdd('schema:image',fragment_id);
 				if(imageEntity){
