@@ -95,3 +95,26 @@ a {
 	color: black;
 	
 }
+
+.f_tag{
+	border-radius: 10px;
+	border: 2px solid blue;
+}
+
+.f_tag_trans_hover{
+	border: 5px solid lightblue;
+}
+
+.f_tag_caption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 1px 0;
+	text-align: center;
+	background: #DDD;
+	font-size: 11px;
+	cursor: pointer;
+	z-index: 10;
+	overflow: hidden;
+}

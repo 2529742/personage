@@ -49,6 +49,7 @@
                 });
 				$(this).hover(
 					function(){
+						$(this).addClass('f_tag_trans_hover');
 						var fragment_id = self.parseFragmentId(this);
 						var mediaEntity = myVIE.entities.get(fragment_id);
 						if(mediaEntity){
@@ -59,6 +60,7 @@
 						}
 					},
 					function(){
+						$(this).removeClass('f_tag_trans_hover');
 						var fragment_id = self.parseFragmentId(this);
 						var mediaEntity = myVIE.entities.get(fragment_id);
 						if(mediaEntity){
@@ -132,7 +134,6 @@
 				var top = parentEl.height()*(mediaEntity.get('y') - h/2)/100;
 				$el.css({
 					position: 'absolute',
-					border: '2px solid #8EC3CA',
 					top: top,
 					left: left,
 					width: w+'%',
