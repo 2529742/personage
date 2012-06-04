@@ -24,11 +24,14 @@ $ (function ()  {
         'http://dbpedia.org/resource/Ringo_Starr',
         'http://dbpedia.org/resource/Paul_McCartney'
     ];
+	var content = $('#content');
     var myVIE = window.myVIE = new VIE();
-    myVIE.use(new myVIE.DBPediaService());
+    myVIE.use(new myVIE.StanbolService, 'stanbol');
     myVIE
-    .load({entity: entities})
-    .using('dbpedia')
+	.analyze({
+        element: content
+    })
+    .using('stanbol')
     .execute()
     .done(function(){
     });

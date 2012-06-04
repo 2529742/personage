@@ -126,6 +126,13 @@
 				var $el = $(this.el);
 				var mediaEntity = this.model;
                 $el.attr('tid', mediaEntity.get('tid'));
+				$el.attr('fx', mediaEntity.get('x'));
+				$el.attr('fy', mediaEntity.get('y'));
+				$el.attr('fheight', mediaEntity.get('schema:height'));
+				$el.attr('fwidth', mediaEntity.get('schema:width'));
+				var parent_url = mediaEntity.get('parentImage');
+				parent_url = parent_url.isEntity? parent_url.getSubjectUri(): parent_url;
+				$el.attr('fsrc', parent_url);
                 var container = $("<div class='f_tag_caption'><span>Tag me</span></div>");
                 $el.append(container);
 				var h = mediaEntity.get('schema:height');
