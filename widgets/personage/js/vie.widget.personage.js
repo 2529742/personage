@@ -126,7 +126,7 @@
 				var $el = $(this.el);
 				var mediaEntity = this.model;
                 $el.attr('tid', mediaEntity.get('tid'));
-                var container = $("<div class='f_tag_caption'><span></span></div>");
+                var container = $("<div class='f_tag_caption'><span>Tag me</span></div>");
                 $el.append(container);
 				var h = mediaEntity.get('schema:height');
 				var w = mediaEntity.get('schema:width');
