@@ -80,17 +80,19 @@ $ (function ()  {
 function getImage(person_entity){
 	var images = [];
 	var fragment_id = person_entity.get('annotatedIMG');
-	fragment_id = jQuery.isArray(fragment_id)? fragment_id: [fragment_id];
-	for(var i = 0; i < fragment_id.length; i++){		
-		var mediaEntity = myVIE.entities.get(fragment_id[i]);
-		var height = mediaEntity.get( 'schema:height');
-		var width = mediaEntity.get('schema:width');
-		var x = mediaEntity.get('x');
-		var y = mediaEntity.get('y');
-		var photo_url = mediaEntity.get('parentImage');
-		photo_url = mediaEntity.isEntity? photo_url.getSubjectUri(): photo_url.replace(/<|>/,'');
-		var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
-		images.push(imgElement);
+	if(fragment_id){
+		fragment_id = jQuery.isArray(fragment_id)? fragment_id: [fragment_id];
+		for(var i = 0; i < fragment_id.length; i++){		
+			var mediaEntity = myVIE.entities.get(fragment_id[i]);
+			var height = mediaEntity.get( 'schema:height');
+			var width = mediaEntity.get('schema:width');
+			var x = mediaEntity.get('x');
+			var y = mediaEntity.get('y');
+			var photo_url = mediaEntity.get('parentImage');
+			photo_url = mediaEntity.isEntity? photo_url.getSubjectUri(): photo_url.replace(/<|>/,'');
+			var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+			images.push(imgElement);
+		}
 	}
 	return images;
 }
