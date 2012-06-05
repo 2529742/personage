@@ -26,7 +26,6 @@ a img {
 }
 
 html {
-    height: 100%; 
   background: #eeeeee;
 }
 
@@ -39,7 +38,7 @@ body {
 }
 
 #wrapper {
-  width: 680px;
+  width: 480px;
   margin: 0 auto 40px;
   background: white;
   padding: 20px;
@@ -55,12 +54,12 @@ h1 {
     text-align: center;
     padding: 20px 0 30px 0;
     line-height: 1;
-	text-shadow: 1px 1px 3px gray;
 }
 
 h2 {
     font-size: 30px;
     font-weight: bold;
+    text-align: center;
     padding: 0px 0 20px 0;
     line-height: 1;
 }
@@ -68,6 +67,7 @@ h2 {
 h3 {
     font-size: 26px;
     font-weight: bold;
+    text-align: center;
     padding: 0px 0 20px 0;
     line-height: 1;
 }
@@ -75,6 +75,7 @@ h3 {
 h4 {
     font-size: 22px;
     font-weight: bold;
+    text-align: center;
     padding: 0px 0 20px 0;
     line-height: 1;
 }
@@ -101,94 +102,31 @@ h4 {
   text-align: center;
 }
 
-#sample_img {
-	  width: 300px;
-    font-size: 70%;
-    height: auto;
-	  background: white;
-	  padding: 1em 1em 1em 1em;
-    -webkit-border-radius: 0.8em;
-    -moz-border-radius: 0.8em;
-  
-    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 16px 0;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 16px 0;
-    -o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 16px 0;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 16px 0;
+#warning {
+	border: 3px solid orange;
+	border-top: 0px;
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+	background-color: #FFFEA1;
+	position: fixed;
+	width: 380px;
+	height: 80px;
+	padding: 10px;
+	top: 0px;
+	left: 50%;
+	margin-left: -200px;
+	display:none;
+	font-family: "Courier";
+	font-size: 10px;
 }
 
-#widgets {
-    text-align: center;
+#warning:after {
+	content: "Click to dismiss message!";
+	position: absolute;
+	bottom: 0px;
+	left: 5px;
 }
 
-#widgets h2 {
-    font-size: 300%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-#widgets div {
-    margin: 1em 0;
-}
-
- #start {
-
-    display: inline-block;
-	  outline: none;
-	  cursor: pointer;
-	  text-align: center;
-	  text-decoration: none;
-	  font: 16px/100% Arial, Helvetica, sans-serif;
-	  padding: .5em 2em .55em;
-	  text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	  -webkit-border-radius: .5em; 
-	  -moz-border-radius: .5em;
-	  border-radius: .5em;
-	  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	  box-shadow: 0 1px 2px rgba(0,0,0,.2);
- 
-
-}
-
-a {
-    text-decoration: none;
-    color: #1b1eb4;
-}
-
-[about] {
-	  text-shadow: 0 0 0.1em #87F;
-	  cursor: move;
-	  z-index: 9999;
-	  color: navy;
-}
-
-.hover{
-	  text-shadow: 2px 2px 5px #87F;
-	  color: black;
-	
-}
-
-.f_tag{
-	  border-radius: 10px;
-	  border: 2px solid darkblue;
-}
-
-.f_tag_trans_hover{
-	  border: 3px solid lightblue;
-}
-
-.f_tag_caption {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  right: 0;
-	  padding: 1px 0;
-	  text-align: center;
-	  background: #DDD;
-	  font-size: 11px;
-	  cursor: pointer;
-	  z-index: 10;
-	  overflow: hidden;
-	  opacity: 0.8;
+pre {
+	overflow:scroll;
 }

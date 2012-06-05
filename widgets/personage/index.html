@@ -10,7 +10,7 @@
     xmlns:schema="http://schema.org/"
     xmlns:demo="http://iks.demo.eu/">
 	<head>
-        <title>Image annotation</title>
+        <title>VIE Widget - Personage</title>
 		<!--script type="text/javascript" src="./lib/tagger.js"></script -->
 		
 		<link rel="stylesheet" type="text/css" href="./css/demo.css" />
@@ -23,6 +23,10 @@
 		<script type="text/javascript" src="https://raw.github.com/2529742/personage/master/lib/backbone-0.9.0.js"></script>
 		<script type="text/javascript" src="../../lib/jquery.rdfquery.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery.livequery.js"></script>
+
+		<!-- jQuery TipTip plugin -->
+		<script type="text/javascript" src="../../utils/tiptip/jquery.tipTip.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../utils/tiptip/jquery.tipTip.css" media="screen"/>
 		
 		
 		<!--script type="text/javascript" src="./lib/vie-2.0.0.js"></script-->
@@ -38,28 +42,36 @@
 		<script type="text/javascript" src="./js/demo.js"></script>
     </head>
     <body>
-        <div id="container">
-            <div id="content">
+		<div id="wrapper">
+			<h1>VIE Widget - Personage</h1>
+			<article>
 				<h2 class="title">The Beatles</h2>
-				The Beatles were an English rock band formed in Liverpool in 1960, 
-				and one of the most commercially successful and critically acclaimed acts in the history of popular music.
-				The group's best-known lineup consisted of John Lennon (rhythm guitar, vocals), 
-				Paul McCartney (bass guitar, vocals), George Harrison (lead guitar, vocals) 
-				and Ringo Starr (drums, vocals). Rooted in skiffle and 1950s rock and roll, 
-				the group later worked in many genres ranging from pop ballads to psychedelic rock, 
-				often incorporating classical and other elements in innovative ways. 
-				Their enormous popularity first emerged as "Beatlemania"; 
-				as their songwriting grew in sophistication by the late 1960s, 
-				they came to be perceived by many fans and cultural observers as 
-				an embodiment of the ideals shared by the era's sociocultural revolutions.
-			</div>
+				<section>
+				The Beatles were an English rock band formed in Liverpool in 1960, and one of the most commercially successful and critically acclaimed acts in the history of popular music. The group's best-known lineup consisted of <span about="http://dbpedia.org/resource/John_Lennon" typeof="Person"> John Lennon </span> (rhythm guitar, vocals),<span about="http://dbpedia.org/resource/Paul_McCartney" typeof="Person"> Paul McCartney </span> (bass guitar, vocals),<span about="http://dbpedia.org/resource/George_Harrison" typeof="Person"> George Harrison </span>(lead guitar, vocals) and <span about="http://dbpedia.org/resource/Ringo_Starr" typeof="Person"> Ringo Starr </span>(drums, vocals). Rooted in skiffle and 1950s rock and roll, the group later worked in many genres ranging from pop ballad s to psychedelic rock, often incorporating classical and other elements in innovative ways. Their enormous popularity first emerged as "Beatlemania"; as their songwriting grew in sophistication by the late 1960s, they came to be perceived by many fans and cultural observers as an embodiment of the ideals shared by the era's sociocultural revolutions.
+				</section>
+				</br>
+			</article>
 			<div id="widgets">
 				<button id="start" onclick="startAnnotation()">Start image annotation</button>
-				<div id="entity_info"></div>
 				<div id="photos">
 					<img id="sample_img" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG"/>
 				</div>
 			</div>
-        </div>
+			<div class="copyright">This site uses the <a href="http://developers.face.com/docs/api/">FACE.COM API</a>! <br />However it is not associated or endorsed by <a href="http://face.com/">face.com</a>.<br />
+			</div>
+			<div style="text-align:center;margin-top:20px;" class="tellmemore">
+				<h3>Tutorial</h3>
+				Click <a style="color:#31e;" href="explain.html">here</a> for the tutorial.
+			</div>
+			<div style="width:130px;margin-left:auto;margin-right:auto;margin-top:20px;" class="download">
+				<h3>Download</h3>
+				<a href="http://github.com/neogermi/VIEwidgets/zipball/master">
+					<img border="0" width="60" src="http://github.com/images/modules/download/zip.png">
+				</a>
+				<a href="http://github.com/neogermi/VIEwidgets/tarball/master">
+					<img border="0" width="60" src="http://github.com/images/modules/download/tar.png">
+				</a>
+			</div>
+		</div>
     </body>
 </html>
