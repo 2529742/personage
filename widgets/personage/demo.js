@@ -42,11 +42,11 @@ $ (function ()  {
     });
 	
 	persons
-	.attr("title", "You can drag the entity and drop it on the image tag to create a semantic relation between the Person and it's image annotation.")
+	.attr("title", "Drag-and-drop entity on an image tag. This will create a semantic relation between the entity and the image annotation.")
 	.tipTip();
 
 	$('#start')
-	.attr("title", "Press the button to start the face detection an the image annotation.")
+	.attr("title", "Click on the button to start face detection and image annotation.")
 	.tipTip();
   //highlight photo on hover
     $(persons).each(function() {

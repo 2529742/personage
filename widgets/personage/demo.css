@@ -186,7 +186,7 @@ a {
 	  padding: 1px 0;
 	  text-align: center;
 	  background: #DDD;
-	  font-size: 11px;
+	  font-size: 80%;
 	  cursor: pointer;
 	  z-index: 10;
 	  overflow: hidden;
