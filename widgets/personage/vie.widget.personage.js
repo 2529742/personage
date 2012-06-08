@@ -87,6 +87,7 @@
             add_tag_button: true,
             demo_mode: true,
             success: function(img, response){
+				response = (response instanceof Object)? response: JSON.parse(response);
                 var photos = response.photos? response.photos: [];
                 for(var i = 0; i < photos.length; i++){
                     var photo = photos[i];
@@ -109,6 +110,7 @@
 				attributes: 'all'
 			},
 			success: function(response){
+						response = (response instanceof Object)? response: JSON.parse(response);
 						var photos = response.photos? response.photos: [];
 						for(var i = 0; i < photos.length; i++){
 							var photo = photos[i];
