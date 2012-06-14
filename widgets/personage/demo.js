@@ -1,22 +1,4 @@
 $ (function ()  {
-
-  var text = ("<h2> The Beatles</h2>" +
-              "<section>The Beatles were an English rock band formed in Liverpool in 1960," +
-              " and one of the most commercially successful and critically acclaimed acts in the history of popular music." +
-              " The group's best-known lineup consisted of <span about=\"http://dbpedia.org/resource/John_Lennon\" typeof= \"Person\"> John Lennon </span> (rhythm guitar, vocals)," +
-              " <span about=\"http://dbpedia.org/resource/Paul_McCartney\" typeof=\"Person\"> Paul McCartney </span> (bass guitar, vocals)," +
-              " <span about=\"http://dbpedia.org/resource/George_Harrison\" typeof=\"Person\"> George Harrison </span>(lead guitar, vocals)" +
-              " and <span about=\"http://dbpedia.org/resource/Ringo_Starr\" typeof=\"Person\"> Ringo Starr </span>(drums, vocals). Rooted in skiffle and 1950s rock and roll," +
-              " the group later worked in many genres ranging from pop ballad s to psychedelic rock," +
-              " often incorporating classical and other elements in innovative ways." +
-              " Their enormous popularity first emerged as \"Beatlemania\";" +
-              " as their songwriting grew in sophistication by the late 1960s," +
-              " they came to be perceived by many fans and cultural observers as" +
-              " an embodiment of the ideals shared by the era's sociocultural revolutions.</section><br/>");
-    replaceText(text);
-    urlImage = 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG';
-    replaceImage (urlImage);
-
     //Instantiate VIE and load entities
     var entities = [
         'http://dbpedia.org/resource/John_Lennon',
@@ -33,7 +15,17 @@ $ (function ()  {
     })
     .using('stanbol')
     .execute()
-    .done(function(){
+    .done(function(results){
+			var pers = results.filter(function(e){return (e.get('entityhub:entityRank')>0.5)&&(e.isof('dbpedia:Person'));}); //Filter found entities to be only persons
+			for(var p in pers){
+				var person = pers[p];
+				var person_name = person.get('name').filter(function(n){debugger; return n['@language']=='en';}).toString();
+				var about = person.getSubjectUri();
+				var person_div = $('<div class="person-entity" about="' + about + '"><h5>' + person_name + '<h5><div class="person-entity-image"></div>');
+
+				$('#persons').append(person_div);
+			}
+		
     });
     //activate draggables
     var persons = $('article').find('[typeof="Person"]');
@@ -102,7 +94,8 @@ function startAnnotation(){
     $('#photos').viePersonage({
         FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
 		FACE_API_SECRET: "36358726496a759433291efe408da188",
-        myVIE: myVIE
+        myVIE: myVIE,
+		done: imageResults
     });
 }
   function replaceText(text) {
@@ -122,4 +115,13 @@ function startAnnotation(){
             });
         }
     });
+ }
+ 
+ function imageResults(entities){
+	for(var f = 0; f < entities.length; f++){
+		var fragment = entities[f];
+		var fragment_id = fragment.getSubjectUri();
+		var fragment_div = $('<div class="person-entity" about="' + fragment_id + '"><h5>Fragment' + f + '<h5><div class="person-entity-image"></div>');
+		$('#fragments').append(fragment_div);
+	}
  }

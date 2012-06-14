@@ -101,6 +101,23 @@ h4 {
   text-align: center;
 }
 
+#photos {
+
+}
+
+table {
+	padding: 0 20px 0 10px;
+	text-align: left;
+}
+
+td{
+padding: 0 0 0 5px;
+}
+
+#results{
+	
+}
+
 #sample_img {
 	  width: 300px;
     font-size: 70%;
@@ -118,6 +135,7 @@ h4 {
 
 #widgets {
     text-align: center;
+	display: inline-block;
 }
 
 #widgets h2 {
@@ -133,8 +151,7 @@ h4 {
 
  #start {
 
-    display: inline-block;
-	  outline: none;
+	outline: none;
 	  cursor: pointer;
 	  text-align: center;
 	  text-decoration: none;
@@ -156,7 +173,7 @@ a {
     color: #1b1eb4;
 }
 
-[about] {
+[typeof] {
 	  text-shadow: 0 0 0.1em #87F;
 	  cursor: move;
 	  z-index: 9999;
