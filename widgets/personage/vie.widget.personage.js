@@ -8,7 +8,7 @@
     _init: function () {
             var self = this;
 			var v = self.options.myVIE;
-            if(v.types.get("owl:Thing")){
+            if(v.types.get("owl:Thing") && v.types.get("annotatedIMG")){
                 v.types.get("owl:Thing").attributes.add("annotatedIMG", ["ImageObject"]);
             }
 

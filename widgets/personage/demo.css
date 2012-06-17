@@ -145,10 +145,6 @@ padding: 0 0 0 5px;
     text-align: center;
 }
 
-#widgets div {
-    margin: 1em 0;
-}
-
  #start {
 
 	outline: none;
@@ -189,6 +185,7 @@ a {
 .f_tag{
 	  border-radius: 10px;
 	  border: 2px solid darkblue;
+	  margin: 0;
 }
 
 .f_tag_trans_hover{
