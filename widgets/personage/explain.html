@@ -35,18 +35,32 @@
 ...
 </pre>
 <br />
-<h3>Events</h3>
-<h4>Pre-init</h4>
+<h4>Initialization</h4>
 <pre class="sh_javascript_dom"></pre>
 <h3>Options</h3>
-<h4>Post-init</h4>
-<pre class="sh_javascript_dom"></pre>
-<h3>Options</h3>
-<h4>Pre-init</h4>
-<pre class="sh_javascript_dom"></pre>
-
-<h3>Methods</h3>
-<pre class="sh_javascript_dom"></pre>
+<div>
+<ul>
+<li>FACE_API_KEY and FACE_API_SECRET - pair obtained from Face.com web service (required),</li>
+<li>myVIE - VIE instance (required),</li>
+<li>done - a callback function, called after creation of the image annotating entities (optional)<p></p></li>
+</ul>
+</div>
+<h4>Example:</h4>
+<pre class="sh_javascript_dom">
+    $('#photos').viePersonage({
+        FACE_API_KEY: "abcderrtyew",
+        FACE_API_SECRET: "1234asd",
+        myVIE: myVIE,
+        done: imageResults
+    });
+	
+	function imageResults(entities){
+		for(var f = 0; f < entities.length; f++){
+			var fragment_entity = entities[f];
+			console.log(fragment_entity);
+		}
+	}
+</pre>
     </article>
     
     <div style="width:130px;margin-left:auto;margin-right:auto;margin-top:20px;" class="download">

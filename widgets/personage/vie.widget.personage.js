@@ -2,6 +2,10 @@
     $.widget('view.viePersonage', {
         _create: function () {
             FaceClientAPI.init(this.options.FACE_API_KEY);
+			this.activateDraggables(this.options.draggable);
+			if(this.options.highlight){
+				this.activateHighlighting();
+			}
             return this;
         },
        
@@ -47,32 +51,34 @@
                         }
                     }
                 });
-				$(this).hover(
-					function(){
-						$(this).addClass('f_tag_trans_hover');
-						var fragment_id = self.parseFragmentId(this);
-						var mediaEntity = myVIE.entities.get(fragment_id);
-						if(mediaEntity){
-							var about = mediaEntity.get('schema:about');
-							if(about){
-								about = about.isEntity? about.getSubjectUri(): about;
-								$('[about="' + about + '"]').addClass('hover');
+				if(self.options.highlight){
+					$(this).hover(
+						function(){
+							$(this).addClass('f_tag_trans_hover');
+							var fragment_id = self.parseFragmentId(this);
+							var mediaEntity = myVIE.entities.get(fragment_id);
+							if(mediaEntity){
+								var about = mediaEntity.get('schema:about');
+								if(about){
+									about = about.isEntity? about.getSubjectUri(): about;
+									$('[about="' + about + '"]').addClass('hover');
+								}
+							}
+						},
+						function(){
+							$(this).removeClass('f_tag_trans_hover');
+							var fragment_id = self.parseFragmentId(this);
+							var mediaEntity = myVIE.entities.get(fragment_id);
+							if(mediaEntity){
+								var about = mediaEntity.get('schema:about');
+								if(about){
+									about = about.isEntity? about.getSubjectUri(): about;
+									$('[about="' + about + '"]').removeClass('hover');
+								}
 							}
 						}
-					},
-					function(){
-						$(this).removeClass('f_tag_trans_hover');
-						var fragment_id = self.parseFragmentId(this);
-						var mediaEntity = myVIE.entities.get(fragment_id);
-						if(mediaEntity){
-							var about = mediaEntity.get('schema:about');
-							if(about){
-								about = about.isEntity? about.getSubjectUri(): about;
-								$('[about="' + about + '"]').removeClass('hover');
-							}
-						}
-					}
-				);
+					);
+				}
             });
        },
 	//Face.com tagging  widget
@@ -96,7 +102,7 @@
             }
         });
     },
-	
+	//Custom rendering
 	getTags: function(img_src, callback, v, self){
 		var tags = {};
 		var urls = img_src.join(',');
@@ -213,12 +219,106 @@
 		var fragment_id = (h && w && x && y && photo_url)? (photo_url + '#xywh=percent:' + x + ',' + y + ',' + w + ',' + h): tid;
 		return fragment_id;
 	},
+	
+	activateHighlighting: function(){
+		var getImage = function (entity){
+			var images = [];
+			var fragment_id = entity.get('annotatedIMG');
+			if(fragment_id){
+				fragment_id = jQuery.isArray(fragment_id)? fragment_id: [fragment_id];
+				for(var i = 0; i < fragment_id.length; i++){		
+					var mediaEntity = myVIE.entities.get(fragment_id[i]);
+					var height = mediaEntity.get( 'schema:height');
+					var width = mediaEntity.get('schema:width');
+					var x = mediaEntity.get('x');
+					var y = mediaEntity.get('y');
+					var photo_url = mediaEntity.get('parentImage');
+					photo_url = mediaEntity.isEntity? photo_url.getSubjectUri(): photo_url.replace(/<|>/,'');
+					var imgElement = $('[fheight="'+ height + '"][fwidth="'+ width +'" ][fx="'+ x +'"][fy="'+ y +'"][fsrc="'+ photo_url+'"]');
+					images.push(imgElement);
+				}
+			}
+			return images;
+		};
+		var highlight = function(selector){
+			$(selector)
+			.hover(
+				function()  {
+					$(this).addClass('hover');
+					var about = $(this).attr('about');
+					var entity = myVIE.entities.get(about);
+					if (entity) {
+						var images = getImage(entity);
+						$(images).each(function(){
+							$(this).addClass("f_tag_trans_hover");
+						});
+					}
+				}, 
+				function()  { 
+					$(this).removeClass('hover');
+					var about = $(this).attr('about');
+					var entity = myVIE.entities.get(about);
+					if (entity) {
+						var images = getImage(entity);
+						$(images).each(function(){
+							$(this).removeClass("f_tag_trans_hover");
+						});
+					}
+				}
+			);
+		}
+		var filter = this.options.draggable;
+		if(jQuery.isArray(filter)){
+			for(var i = 0; i < filter.length; i++){
+				var draggables = $('[typeof="' + filter[i] + '"]');
+				highlight(draggables);
+			}
+		}
+		else if(filter == undefined){
+			var draggables = $('[typeof]');
+			highlight(draggables);
+		}
+	},
+	
+	activateDraggables: function(filter){
+		var entityDrag = function (element){
+			$(element).draggable({
+				stop: function(){
+					$(this).css({
+						left: '',
+						top: ''
+					});
+				}
+			});
+		};
+		
+		if(jQuery.isArray(filter)){
+			for(var i = 0; i < filter.length; i++){
+				var draggables = $('[typeof="' + filter[i] + '"]')
+				.each(function(){
+					entityDrag(this);
+				})
+				.attr("title", "Drag-and-drop entity on an image tag. This will create a semantic relation between the entity and the image annotation.")
+				.tipTip();
+			}
+		}
+		else if(filter == undefined){
+			var draggables = $('[typeof]')
+			.each(function(){
+					entityDrag(this);
+				})
+			.attr("title", "Drag-and-drop entity on an image tag. This will create a semantic relation between the entity and the image annotation.")
+			.tipTip();
+		}
+	},
         
     options: {
        FACE_API_KEY: undefined,
 	   FACE_API_SECRET: undefined,
        myVIE: undefined,
-	   done: function(entities){}
+	   done: function(entities){},
+	   draggable: undefined,
+	   highlight: true
     }
     });
 })(jQuery);
