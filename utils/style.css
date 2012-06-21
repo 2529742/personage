@@ -81,9 +81,9 @@ h4 {
 }
 
 #wrapper article {
-  margin-bottom: 20px;
-  border-bottom: 1px dotted grey;
-  text-align:justify;
+    margin-bottom: 20px;
+    border-bottom: 1px dotted grey;
+    text-align:justify;
 }
 
 #wrapper .from, #wrapper .from a {
