@@ -1,6 +1,6 @@
 <html>
-<head>
-    <title>VIE Widget - Personage</title>
+  <head>
+    <title><a href= "http://viejs.org">VIE Widget</a> - Personage</title>
     
     <link href="../../utils/style.css" media="screen" rel="stylesheet">
     
@@ -13,15 +13,22 @@
     <script type="text/javascript"          src="../../utils/shjs/sh_javascript.min.js"></script>
     <script type="text/javascript"          src="../../utils/shjs/sh_javascript_dom.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../utils/shjs/sh_dull.min.css" media="screen" />
-</head>
-<body onload="sh_highlightDocument();">
-<div id="wrapper">
-    <h1>VIE Widget - Personage</h1>
-    <h2>How To</h2>
-   <article>
+  </head>
+  <body onload="sh_highlightDocument();">
+    <div id="wrapper">
+      <h1> VIE Widget - Personage</h1>
+      <article>
+      <p> <span><b>Personage</b></span> is a <a href= "http://viejs.org">VIE </a>widget that enhances content with image annotation. It creates entities of <a href="http://www.schema.org/MediaObject">"MediaObject"</a> type for an image and its fragments. As a result, a user can establish a semantic connection between entities in textual content and their corresponding images.</p></br>
+      <h4>Example:</h4>
+      <p> "The Beatles" article below contains four entities in the text: John Lennon, Paul McCartney, George Harrison and Ringo Starr. By dragging and dropping the entity from the text on its corresponding tag in the image, a user created a semantic connection between the entities in the text and corresponding image entities. This can be seen, for instance, when a user selects a photo of Paul McCartney, then the widget recognizes the existing connection and highlights the entity "Paul McCartney" in the text.</p>
+      </br>
+      <img src="example_semantic_connection.jpg" alt="Example" width="480" height="480"/>
+      </br></br>
+      <h2>How To</h2>
+    
     First, we need to include the dependencies in the header:
-    <br /><br />
-        <pre class="sh_javascript_dom">
+    <br/>
+    <pre class="sh_javascript_dom">
 ...
 &lt;script type="text/javascript" src=".../jquery.js">&lt;/script>
 &lt;script type="text/javascript" src=".../underscore.js">&lt;/script>
@@ -33,35 +40,41 @@
 &lt;!--  the current VIE widget -->
 &lt;script type="text/javascript" src="./vie.widget.personage.js">&lt;/script>
 ...
-</pre>
-<br />
-<h4>Initialization</h4>
-<pre class="sh_javascript_dom"></pre>
-<h3>Options</h3>
-<div>
-<ul>
-<li>FACE_API_KEY and FACE_API_SECRET - pair obtained from Face.com web service (required),</li>
-<li>myVIE - VIE instance (required),</li>
-<li>done - a callback function, called after creation of the image annotating entities (optional)<p></p></li>
-</ul>
-</div>
-<h4>Example:</h4>
-<pre class="sh_javascript_dom">
+    </pre>
+   <br/>
+   <h3>Initialization</h3>
+   <pre class="sh_javascript_dom"></pre>
+   <h4>Options:</h4>
+   
+     <p>Required:</p>
+       <ul> 
+         <li><b>FACE_API_KEY</b> and <b>FACE_API_SECRET</b> - these are API key and  API secret values that are necessary to get web service from www.face.com</li> </br>
+         <li><b>myVIE</b> - the <a href= "http://viejs.org">VIE </a>instance</li> 
+       </ul>
+     <p> Optional:</p>
+       <ul>
+         <li><b>done</b> - a callback function, which is called after creation of the image annotating entities.</li></br>
+         <li><b>draggable</b> - an option (array) that makes annotated entities in text draggable. It is given as an array with entity types, for example: ['Person', 'Place']. If the option is undefined, then by default all annotated entities become draggable. Default setting is "undefined".</li></br>
+         <li><b>highlight</b> - an option (boolean) that activates highlighting between semantically connected entities. If set to "true", then highlighting is activated, "false" - deactivated. Default setting is "true".</li>
+       </ul>
+   
+   <h4>Example:</h4>
+   <p> In order to initialize the widget, call the widget on a jQuery selector that contains all images that need to be annotated.</p></br>
+   <pre class="sh_javascript_dom">
     $('#photos').viePersonage({
         FACE_API_KEY: "abcderrtyew",
         FACE_API_SECRET: "1234asd",
-        myVIE: myVIE,
-        done: imageResults
+        myVIE: myVIE
     });
 	
-	function imageResults(entities){
-		for(var f = 0; f < entities.length; f++){
-			var fragment_entity = entities[f];
-			console.log(fragment_entity);
-		}
-	}
-</pre>
-    </article>
+    function imageResults(entities){
+	   for(var f = 0; f < entities.length; f++) {
+		   var fragment_entity = entities[f];
+		   console.log(fragment_entity);
+	   }
+    }
+   </pre>
+   </article>
     
     <div style="width:130px;margin-left:auto;margin-right:auto;margin-top:20px;" class="download">
       <h3>Download</h3>
