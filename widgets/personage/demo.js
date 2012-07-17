@@ -20,7 +20,7 @@ $ (function ()  {
 			var pers = results.filter(function(e){return (e.get('entityhub:entityRank')>0.5)&&(e.isof('dbpedia:Person'));}); //Filter found entities to be only persons
 			for(var p in pers){
 				var person = pers[p];
-				var person_name = person.get('name').filter(function(n){debugger; return n['@language']=='en';}).toString();
+				var person_name = person.get('name').filter(function(n){return n['@language']=='en';}).toString();
 				var about = person.getSubjectUri();
 				var person_div = $('<div class="person-entity" about="' + about + '"><h5>' + person_name + '<h5><div class="person-entity-image"></div>');
 
