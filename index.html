@@ -1,66 +1,98 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Personage by 2529742</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html  
+    version="XHTML+RDFa 1.0"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xml:lang="en"
+	  xmlns:dbpedia = "http://dbpedia.org/resource/"
+	  xmlns:dbprop = "http://dbpedia.org/property/"
+	  xmlns:dbonto = "http://dbpedia.org/ontology/"
+    xmlns:schema="http://schema.org/"
+    xmlns:demo="http://iks.demo.eu/">
+	<head>
+        <title>VIE Widget - Personage</title>
+			
+		<link rel="stylesheet" type="text/css" href="./demo.css" />
+		
+		<!-- jQuery -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Personage</h1>
-        <p>VIE widget</p>
+		<script type="text/javascript" src="lib/underscore.js"></script>	
+		<script type="text/javascript" src="lib/backbone.js"></script>
+		<script type="text/javascript" src="lib/jquery.rdfquery.js"></script>
+		<script type="text/javascript" src="lib/jquery.livequery.js"></script>
 
-        <p class="view"><a href="https://github.com/2529742/personage">View the Project on GitHub <small>2529742/personage</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/2529742/personage/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/2529742/personage/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/2529742/personage">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/2529742">2529742</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+		<!-- jQuery TipTip plugin -->
+		<script type="text/javascript" src="utils/tiptip/jquery.tipTip.js"></script>
+		<link rel="stylesheet" type="text/css" href="utils/tiptip/jquery.tipTip.css" media="screen"/>
+		
+		<!-- VIE -->
+		<script type="text/javascript" src="lib/vie-2.0.0.debug.js"></script>
+			
+		<!-- Face recognition widget Face.com -->
+		<script type="text/javascript" src="http://api.face.com/lib/api_client.js"></script>
+		<script type="text/javascript" src="http://api.face.com/lib/tagger.js"></script>
+		
+		<!-- Demo specific code -->
+		<script type="text/javascript" src="./vie.widget.personage.js"></script>
+		<script type="text/javascript" src="./demo.js"></script>
+    </head>
+    <body>
+		<div id="wrapper">
+			<h1>VIE Widget - Personage</h1>
+			<article>
+				<h2 class="title">The Beatles</h2>
+				<section>
+				The Beatles were an English rock band formed in Liverpool in 1960, and one of the most commercially successful and critically acclaimed acts in the history of popular music. The group's best-known lineup consisted of <span about="http://dbpedia.org/resource/John_Lennon" typeof="Person"> John Lennon </span> (rhythm guitar, vocals),<span about="http://dbpedia.org/resource/Paul_McCartney" typeof="Person"> Paul McCartney </span> (bass guitar, vocals),<span about="http://dbpedia.org/resource/George_Harrison" typeof="Person"> George Harrison </span>(lead guitar, vocals) and <span about="http://dbpedia.org/resource/Ringo_Starr" typeof="Person"> Ringo Starr </span>(drums, vocals). Rooted in skiffle and 1950s rock and roll, the group later worked in many genres ranging from pop ballad s to psychedelic rock, often incorporating classical and other elements in innovative ways. Their enormous popularity first emerged as "Beatlemania"; as their songwriting grew in sophistication by the late 1960s, they came to be perceived by many fans and cultural observers as an embodiment of the ideals shared by the era's sociocultural revolutions.
+				</section>
+				</br>
+			</article>
+			<div id="widgets">
+				<table>
+					<tr>
+						<td>
+							<div id="image_annotation">
+								<button id="start" onclick="startAnnotation()">Start image annotation</button>
+								<div id="photos">
+									<img id="sample_img" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG"/>
+								</div>
+							</div>
+						</td>
+						<td>				
+							<table id="results">
+								<tr>
+									<td>
+										<div id="persons">
+											<h3>Person</h3>
+										</div>
+									</td>
+									<td>
+										<div id="fragments">
+											<h3>ImageObject</h3>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				<table>
+			</div>
+			<div class="copyright">This site uses the <a href="http://developers.face.com/docs/api/">FACE.COM API</a>! <br />However it is not associated or endorsed by <a href="http://face.com/">face.com</a>.<br />
+			</div>
+			<div style="text-align:center;margin-top:20px;" class="tellmemore">
+				<h3>Tutorial</h3>
+				Click <a style="color:#31e;" href="explain.html">here</a> for the tutorial.
+			</div>
+			<div style="width:130px;margin-left:auto;margin-right:auto;margin-top:20px;" class="download">
+				<h3>Download</h3>
+				<a href="http://github.com/neogermi/VIEwidgets/zipball/master">
+					<img border="0" width="60" src="http://github.com/images/modules/download/zip.png">
+				</a>
+				<a href="http://github.com/neogermi/VIEwidgets/tarball/master">
+					<img border="0" width="60" src="http://github.com/images/modules/download/tar.png">
+				</a>
+			</div>
+		</div>
+    </body>
 </html>
