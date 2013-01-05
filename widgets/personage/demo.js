@@ -17,7 +17,7 @@ $ (function ()  {
     .execute()
     .done(function(results){
 	//visualize extracted persons
-			var pers = results.filter(function(e){return (e.get('entityhub:entityRank')>0.5)&&(e.isof('dbpedia:Person'));}); //Filter found entities to be only persons
+			var pers = results.filter(function(e){return (e.get('<http://stanbol.apache.org/ontology/entityhub/entityhub#entityRank>')>0.5)&&(e.isof('dbpedia:Person'));}); //Filter found entities to be only persons
 			for(var p in pers){
 				var person = pers[p];
 				var person_name = person.get('name').filter(function(n){return n['@language']=='en';}).toString();
