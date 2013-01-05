@@ -1,7 +1,7 @@
 (function($, undefined) {
     $.widget('view.viePersonage', {
         _create: function () {
-            FaceClientAPI.init(this.options.FACE_API_KEY);
+            //FaceClientAPI.init(this.options.FACE_API_KEY);
 			this.activateDraggables(this.options.draggable);
 			if(this.options.highlight){
 				this.activateHighlighting();
@@ -106,24 +106,32 @@
 	getTags: function(img_src, callback, v, self){
 		var tags = {};
 		var urls = img_src.join(',');
-		$.ajax({
-			url: 'http://api.face.com/faces/detect.json',
-			type: 'POST',
-			data: {
-				api_key: this.options.FACE_API_KEY,
-				api_secret: this.options.FACE_API_SECRET,
-				urls: urls,
-				attributes: 'all'
-			},
-			success: function(response){
-						response = (response instanceof Object)? response: JSON.parse(response);
-						var photos = response.photos? response.photos: [];
-						for(var i = 0; i < photos.length; i++){
-							var photo = photos[i];
-							callback(photo,v,self);
-						}
-					 }
-		});
+		var service = undefined;
+		for(var s in this.options.services){
+			if(this.options.services[s].use){
+				service = this.options.services[s];
+			}
+		}
+		if(service){
+			$.ajax({
+				url: service.url,
+				type: 'POST',
+				data: {
+					api_key: service.api_key,
+					api_secret: service.api_secret,
+					urls: urls,
+					attributes: 'all'
+				},
+				success: function(response){
+							response = (response instanceof Object)? response: JSON.parse(response);
+							var photos = response.photos? response.photos: [];
+							for(var i = 0; i < photos.length; i++){
+								var photo = photos[i];
+								callback(photo,v,self);
+							}
+						 }
+			});
+		}
 	},
     
 	renderTag: function(entityTag, parentEl){
@@ -313,8 +321,20 @@
 	},
         
     options: {
-       FACE_API_KEY: undefined,
-	   FACE_API_SECRET: undefined,
+	   services:{	
+		face: {
+			use: false,
+			url: 'http://api.face.com/faces/detect.json',
+			api_key: undefined,
+			api_secret: undefined
+		},
+		skybiometry: {
+			use: true,
+			url: 'http://api.skybiometry.com/fc/faces/detect.json',
+			api_key: undefined,
+			api_secret: undefined
+		}
+	   },
        myVIE: undefined,
 	   done: function(entities){},
 	   draggable: undefined,

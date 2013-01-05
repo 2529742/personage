@@ -1,3 +1,4 @@
+<<<<<<< HEAD:index.html
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html  
@@ -96,3 +97,103 @@
 		</div>
     </body>
 </html>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html  
+    version="XHTML+RDFa 1.0"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xml:lang="en"
+	  xmlns:dbpedia = "http://dbpedia.org/resource/"
+	  xmlns:dbprop = "http://dbpedia.org/property/"
+	  xmlns:dbonto = "http://dbpedia.org/ontology/"
+    xmlns:schema="http://schema.org/"
+    xmlns:demo="http://iks.demo.eu/">
+	<head>
+        <title>VIE Widget - Personage</title>
+			
+		<link rel="stylesheet" type="text/css" href="./demo.css" />
+		
+		<!-- jQuery -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
+
+		<script type="text/javascript" src="../../lib/underscore.js"></script>	
+		<script type="text/javascript" src="../../lib/backbone.js"></script>
+		<script type="text/javascript" src="../../lib/jquery.rdfquery.js"></script>
+		<script type="text/javascript" src="../../lib/jquery.livequery.js"></script>
+
+		<!-- jQuery TipTip plugin -->
+		<script type="text/javascript" src="../../utils/tiptip/jquery.tipTip.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../utils/tiptip/jquery.tipTip.css" media="screen"/>
+		
+		<!-- VIE -->
+		<script type="text/javascript" src="../../lib/vie-2.1.0.debug.js"></script>
+			
+		<!-- Face recognition widget Face.com -->
+		<script type="text/javascript" src="http://api.face.com/lib/api_client.js"></script>
+		<script type="text/javascript" src="http://api.face.com/lib/tagger.js"></script>
+		
+		<!-- Demo specific code -->
+		<script type="text/javascript" src="./vie.widget.personage.js"></script>
+		<script type="text/javascript" src="./demo.js"></script>
+    </head>
+    <body>
+		<div id="wrapper">
+			<h1>VIE Widget - Personage</h1>
+			<article>
+				<h2 class="title">The Beatles</h2>
+				<section>
+				The Beatles were an English rock band formed in Liverpool in 1960, and one of the most commercially successful and critically acclaimed acts in the history of popular music. The group's best-known lineup consisted of <span about="http://dbpedia.org/resource/John_Lennon" typeof="Person"> John Lennon </span> (rhythm guitar, vocals),<span about="http://dbpedia.org/resource/Paul_McCartney" typeof="Person"> Paul McCartney </span> (bass guitar, vocals),<span about="http://dbpedia.org/resource/George_Harrison" typeof="Person"> George Harrison </span>(lead guitar, vocals) and <span about="http://dbpedia.org/resource/Ringo_Starr" typeof="Person"> Ringo Starr </span>(drums, vocals). Rooted in skiffle and 1950s rock and roll, the group later worked in many genres ranging from pop ballad s to psychedelic rock, often incorporating classical and other elements in innovative ways. Their enormous popularity first emerged as "Beatlemania"; as their songwriting grew in sophistication by the late 1960s, they came to be perceived by many fans and cultural observers as an embodiment of the ideals shared by the era's sociocultural revolutions.
+				</section>
+				</br>
+			</article>
+			<div id="widgets">
+				<table>
+					<tr>
+						<td>
+							<div id="image_annotation">
+								<button id="start" onclick="startAnnotation()">Start image annotation</button>
+								<div id="photos">
+									<img id="sample_img" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/600px-The_Fabs.JPG"/>
+								</div>
+							</div>
+						</td>
+						<td>				
+							<table id="results">
+								<tr>
+									<td>
+										<div id="persons">
+											<h3>Person</h3>
+										</div>
+									</td>
+									<td>
+										<div id="fragments">
+											<h3>ImageObject</h3>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				<table>
+			</div>
+			<div class="copyright">This site uses the <a href="http://developers.face.com/docs/api/">FACE.COM API</a>! <br />However it is not associated or endorsed by <a href="http://face.com/">face.com</a>.<br />
+			</div>
+			<div style="text-align:center;margin-top:20px;" class="tellmemore">
+				<h3>Tutorial</h3>
+				Click <a style="color:#31e;" href="explain.html">here</a> for the tutorial.
+			</div>
+			<div style="width:130px;margin-left:auto;margin-right:auto;margin-top:20px;" class="download">
+				<h3>Download</h3>
+				<a href="http://github.com/neogermi/VIEwidgets/zipball/master">
+					<img border="0" width="60" src="http://github.com/images/modules/download/zip.png">
+				</a>
+				<a href="http://github.com/neogermi/VIEwidgets/tarball/master">
+					<img border="0" width="60" src="http://github.com/images/modules/download/tar.png">
+				</a>
+			</div>
+		</div>
+    </body>
+</html>
+>>>>>>> origin/master:widgets/personage/index.html

@@ -17,7 +17,7 @@ $ (function ()  {
     .execute()
     .done(function(results){
 	//visualize extracted persons
-			var pers = results.filter(function(e){return (e.get('entityhub:entityRank')>0.5)&&(e.isof('dbpedia:Person'));}); //Filter found entities to be only persons
+			var pers = results.filter(function(e){return (e.get('<http://stanbol.apache.org/ontology/entityhub/entityhub#entityRank>')>0.5)&&(e.isof('dbpedia:Person'));}); //Filter found entities to be only persons
 			for(var p in pers){
 				var person = pers[p];
 				var person_name = person.get('name').filter(function(n){return n['@language']=='en';}).toString();
@@ -38,8 +38,13 @@ $ (function ()  {
 function startAnnotation(){
     //initialize face tagger 
     $('#photos').viePersonage({
-        FACE_API_KEY: "16fc0307893bfc78a015c141c6e584bd",
-		FACE_API_SECRET: "36358726496a759433291efe408da188",
+		services: {
+			skybiometry: {
+				use: true,	
+				api_key: "f2f907f4a7f44a918988c477b4cbdc22",
+				api_secret: "3d5c819e62a149aeb4773ad03875381e"
+			}
+		},
         myVIE: myVIE,
 		done: imageResults
     });
