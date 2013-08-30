@@ -1,7 +1,7 @@
 personage
 =========
 
-Personage is a VIE widget that allows to annotate depicted persons with schema.org structures.
+Personage is a [VIE](http://viejs.org) widget that allows to annotate depicted persons with schema.org structures.
 It creates a VIE entity for the entire image;
 and also creates separate VIE entitie(s) for fragment(s) of the image corresponding to the person(s) detected.
 Both image- and fragment-related entities are of the http://schema.org/ImageObject VIE type.
@@ -21,56 +21,56 @@ The demo utilizes "skybiometry": a service for face detection and face recogntio
 
 Example
 =======
-0. Load the dependency scripts in the following order:
+
+1. Load the dependency scripts in the following order:
 
 		<!-- jQuery and jQuery UI -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
-
-    <!-- VIE dependencies: uderderscore, backbone, rdfquery; and wigdet-specific script: livequery -->
+		<!-- VIE dependencies: uderderscore, backbone, rdfquery; and wigdet-specific script: livequery -->
 		<script type="text/javascript" src="underscore.js"></script>	
 		<script type="text/javascript" src="backbone.js"></script>
 		<script type="text/javascript" src="jquery.rdfquery.js"></script>
 		<script type="text/javascript" src="jquery.livequery.js"></script>
-
 		<!-- VIE: VIE library and the widget -->
 		<script type="text/javascript" src="vie-2.1.0.js"></script>
-  	<script type="text/javascript" src="vie.widget.personage.js"></script>
+	  	<script type="text/javascript" src="vie.widget.personage.js"></script>
 
 and create a new script for your code:
-	<script type="text/javascript">
-	...your code...
-	</script>
+
+		<script type="text/javascript">
+		//...your code...
+		</script>
 	
-1. Write there a function that would call the widget:
+2. Write there a function that would call the widget:
+    
+		function startAnnotation(){
+	   		//initialize face tagger 
+	    	    	$('#photos').viePersonage({ //call the widget on the container with the images or on a particular image
+	    			services: { //face detection services
+	    				skybiometry: {
+	    					use: true,	// flag to indicate that this service will be used for face detection (if there are many)
+	    					api_key: "YOUR_API_KEY",
+	    					api_secret: "YOUR_API_SECRET"
+	    				}
+	    			},
+	    			myVIE: myVIE, //your VIE instance
+	    			done: imageResults, // callback function to process the resulted image fragment entities
+	    			//drag-and-drop and hightlight functionality for existing semantic markup on the page:
+	    			draggable: none, // a filter for activating draggables, e.g. for all markup with persons use draggable: [Person]
+	    			highlight: true // use/not use highlighting
+    		    	});
+ 		}
 
- function startAnnotation(){
-    //initialize face tagger 
-    $('#photos').viePersonage({ //call the widget on the container with the images or on a particular image
-    		services: { //face detection services
-    			skybiometry: {
-    				use: true,	// flag to indicate that this service will be used for face detection (if there are many)
-    				api_key: "YOUR_API_KEY",
-    				api_secret: "YOUR_API_SECRET"
-    			}
-    		},
-        myVIE: myVIE, //your VIE instance
-		    done: imageResults, // callback function to process the resulted image fragment entities
-		    //drag-and-drop and hightlight functionality for existing semantic markup on the page:
-		    draggable: none, // a filter for activating draggables, e.g. for all markup with persons use draggable: [Person]
-	      highlight: true // use/not use highlighting
-    });
- }
+3. Write another function to process the results:
 
-2. Write another function to process the results:
+		function imageResults(entities){
+		  	for(var f = 0; f < entities.length; f++){
+		  		var fragment = entities[f];
+	  			console.log(fragment);
+	  		}
+ 		}
 
- function imageResults(entities){
-  	for(var f = 0; f < entities.length; f++){
-	  	var fragment = entities[f];
-	  	console.log(fragment);
-	  }
- }
+4. Call the startAnnotation function whenever you need, e.g. on the button click:
 
-3. Call the startAnnotation function whenever you need, e.g. on the button click:
-
-<button id="start" onclick="startAnnotation()">Start image annotation</button>
+		<button id="start" onclick="startAnnotation()">Start image annotation</button>
