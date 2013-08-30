@@ -1,14 +1,16 @@
 personage
 =========
 
-Personage is a [VIE](http://viejs.org) widget that allows to annotate depicted persons with schema.org structures.
-It creates a VIE entity for the entire image;
+Personage is a [VIE](http://viejs.org) widget that allows to annotate depicted persons with [schema.org](http://schema.org) structures.
+
+It creates a [VIE entity](http://viejs.org/docs/2.1.0/src/Entity.js.html) for the entire image;
 and also creates separate VIE entitie(s) for fragment(s) of the image corresponding to the person(s) detected.
-Both image- and fragment-related entities are of the http://schema.org/ImageObject VIE type.
+Both image- and fragment-related entities are of the http://schema.org/ImageObject [VIE type](http://viejs.org/docs/2.1.0/src/Type.js.html).
 
 The widget also includes a functionality for tagging the detected fragments using existing semantic markup on the page:
 e.g. the page contains the text with a hidden markup
-<span about="http://dbpedia.org/resource/John_Lennon" typeof="Person"> John Lennon </span>
+
+	<span about="http://dbpedia.org/resource/John_Lennon" typeof="Person"> John Lennon </span>
 
 you can drag this text ("John Lennon") and drop it on the appropriate detected fragment of the image. 
 This creates a semantic relation between two entities: person and image objects.
@@ -17,10 +19,12 @@ Another functionality allows to highlight the text and and the image, which are 
 every time the cursor hovers over the text or the fragment - both get highlighted.
 
 
-The demo utilizes "skybiometry": a service for face detection and face recogntion.
+The [demo](http://2529742.github.io/personage/) utilizes [skybiometry](http://www.skybiometry.com/): a service for face detection and face recogntion.
 
 Example
 =======
+
+http://2529742.github.io/personage/
 
 1. Load the dependency scripts in the following order:
 
@@ -45,21 +49,21 @@ and create a new script for your code:
 2. Write there a function that would call the widget:
     
 		function startAnnotation(){
-	   		//initialize face tagger 
-	    	    	$('#photos').viePersonage({ //call the widget on the container with the images or on a particular image
-	    			services: { //face detection services
+		  	//initialize face tagger 
+		  	$('#photos').viePersonage({ //call the widget on the container with the images or on a particular image
+		  		services: { //face detection services
 	    				skybiometry: {
 	    					use: true,	// flag to indicate that this service will be used for face detection (if there are many)
 	    					api_key: "YOUR_API_KEY",
 	    					api_secret: "YOUR_API_SECRET"
 	    				}
-	    			},
-	    			myVIE: myVIE, //your VIE instance
-	    			done: imageResults, // callback function to process the resulted image fragment entities
-	    			//drag-and-drop and hightlight functionality for existing semantic markup on the page:
-	    			draggable: none, // a filter for activating draggables, e.g. for all markup with persons use draggable: [Person]
-	    			highlight: true // use/not use highlighting
-    		    	});
+		  		},
+		  		myVIE: myVIE, //your VIE instance
+		  		done: imageResults, // callback function to process the resulted image fragment entities
+		  		//drag-and-drop and hightlight functionality for existing semantic markup on the page:
+		  		draggable: none, // a filter for activating draggables, e.g. for all markup with persons use draggable: [Person]
+		  		highlight: true // use/not use highlighting
+		  	});
  		}
 
 3. Write another function to process the results:
